@@ -1,0 +1,1907 @@
+<!--
+
+   @Titulo  PHP : Indice principal de la SPA (Single Page Application) que tiene todas las funciones que se llaman desde las páginas php.
+   @Resumen PHP: Contiene todas las funciones que son llamadas desde las páginas PHP, las funciones escritas en JQuery permiten ejecutar cualquier 
+				  página en PHP o HTML y no cargarla en el navegador para que el usuario no tenga opción de regresarse a la página anterior.
+				  Esta funcionalidad nos permite que se ejecute código de una actualización de base de datos una sola vez, de otra manera se
+                  corre el riesgo que el usuario haga un update a una tabla, que se regrese a la página que llamo a la actualización y vea datos 
+                  erróneos ya que se devolvió y no se refrescaron los datos de la página llamante.
+				  
+				  Concepto que se encuentra en Wikipedia de una Single Page Application.
+				  
+				  Una single-page application (SPA), o aplicación de página única, es una aplicación web o es un sitio web que cabe en una sola 
+				  página con el propósito de dar una experiencia más fluida a los usuarios, como si fuera una aplicación de escritorio. En un SPA
+				  todos los códigos de HTML, JavaScript, y CSS se cargan una sola vez1? o los recursos necesarios se cargan dinámicamente cuando lo
+				  requiera la página, normalmente como respuesta a las acciones del usuario. La página no tiene que cargarse de nuevo en ningún punto
+				  del proceso y tampoco es necesario transferir a otra página, aunque las tecnologías modernas (como el pushState() API del HTML5)
+				  permiten la navegabilidad en páginas lógicas dentro de la aplicación. La interacción con las aplicaciones de página única pueden
+				  involucrar comunicaciones dinámicas con el servidor web que está detrás.
+                    				  
+   @Detalle PHP
+
+    Esta página index.html tiene un formulario donde se le pide al usuario su usuario y contraseña, además se le dan las opciones de escoger su dominio
+    y se le dan las opciones de icetel y sabana. Se verifica el usuario por medio del módulo de VerificarUsuarioLDAP para poder entrar al Sistema
+    y poder hacer mantenimientos de las diferentes entidades y tablas. 	
+	<p>
+    En primera instancia el usuario se verifica por la función de JQuery verificar() y este llama a una página PHP donde comienza todas las
+	llamadas a los diferentes mantenimientos.
+	<p>
+	
+	Conceptos de ayuda de tecnología usada en el sistema SSO:
+	<p>
+	<ul>
+	<li>Concepto Single Page Application<a href="https://es.wikipedia.org/wiki/Single-page_application" target="_blank">aquí</a>.
+	<br><br>	
+	<ul>
+	<li>Concepto y práctica de JQuery<a href="https://www.w3schools.com/jquERy/default.asp" target="_blank">aquí</a>.
+	<br><br>	
+	<li>Concepto y práctica de PHP<a href="https://www.w3schools.com/php/php_intro.asp" target="_blank">aquí</a>.
+	<br><br>
+	<li>Datatables de JQuery, más información <a href="https://datatables.net/" target="_blank">aquí</a>.
+	<br><br>
+	<li>Formularios de Bootstrap, más información <a href="https://getbootstrap.com/docs/4.0/components/forms/" target="_blank">aquí</a>.
+	</ul>
+
+	Para la presentación final al usuario, se utilizan los siguientes componentes de HTML:
+	<p>
+	<ul>
+	<li>Datatables de JQuery, más información <a href="https://datatables.net/" target="_blank">aquí</a>.
+	<br><br>
+	<li>Formularios de Bootstrap, más información <a href="https://getbootstrap.com/docs/4.0/components/forms/" target="_blank">aquí</a>.
+	</ul>
+	
+   @Fin detalle HTML  
+   
+   @Diagrama HTML: imgHTML/VerificarPrincipal.png
+
+-->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+ <link rel="stylesheet" type="text/css" href="./HTML/SSO.css" />     
+ <title>SSO</title>
+ <link rel="shortcut icon" href="./IMG/kolbi.ico">
+ 
+ <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+
+</head>
+
+    <link rel="shortcut icon" href="./IMG/kolbi.ico">
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="stylesheet" href="./CSS/w3.css">
+
+	<link rel="stylesheet" type="text/css" href="./HTML/jquery.dataTablesSPACE.min.css">
+	<link href="./HTML/buttons.dataTables.min.css" rel="stylesheet" type="text/css">
+    <link href="./HTML/jquery-ui.css" rel="stylesheet" >
+    <link href="./HTML/dataTables.checkboxes.css" rel="stylesheet">
+
+	<script src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
+	<script type="text/javascript" language="javascript" src="./HTML/jquery-1.12.3.js">	</script>
+	<script type="text/javascript" language="javascript" src="./HTML/jquery.dataTables.min.js">	</script>
+	<script type="text/javascript" language="javascript" src="./HTML/jquery.dataTables.select.min.js">	</script>
+	<script type="text/javascript" language="javascript" src="./HTML/jquery.dataTables.responsive.min.js"></script>
+	<script type="text/javascript" language="javascript" src="./HTML/dataTables.checkboxes.js"></script>
+	<script type="text/javascript" language="javascript" src="./HTML/dataTables.checkboxes.min.js"></script>
+	<script type="text/javascript" language="javascript" src="./HTML/jquery-ui.js"></script>
+	<script type="text/javascript" language="javascript" src="./HTML/jquery.ui-contextmenu.min.js"></script>
+
+	<script src="./HTML/dataTables.buttons.min.js"></script>
+	<script src="./HTML/buttons.colVis.min.js"></script>
+	<script src="./HTML/buttons.flash.min.js"></script>
+	<script src="./HTML/jszip.min.js"></script>
+	<script src="./HTML/pdfmake.min.js"></script>  
+	<script src="./HTML/vfs_fonts.js"></script>
+	<script src="./HTML/buttons.html5.min.js"></script>
+	<script src="./HTML/buttons.print.min.js"></script>
+	
+    <script src="./HTML/bootstrap.min.js"></script>
+		
+	       <script>
+		   		   
+		   /* @Función: MostrarMensajeInformativo
+              @Detalle Función
+		   
+		      Esta función muestra un mensaje de diálogo informativo al usuario que puede
+              ser solo informativo pero que en este sistema normalmente se usa para mostrarle
+              al cliente que un campo específico falta para agregar o modificar, el mensaje
+              de dialogo es modal, es decir, no se deja de mostrar sino hay una una acción 
+              del usuario, en este caso el botón de cerrar o la esquina derecha con la X. 			  
+
+              @Fin Detalle Función
+                                
+		      @Parametros 
+			  
+			  MensajeDialogo : Este parámetro es el mensaje que se le muestra al cliente. 
+			 
+		      @Fin parametros 
+		   */
+		   
+		   
+		   function MostrarMensajeInformativo(MensajeDialogo) {
+		   
+			document.getElementById("Mensaje").textContent = MensajeDialogo;
+			
+		    $( "#dialog-mensaje" ).dialog({
+		        autoOpen: true,
+		        show: {
+		          effect: "fade",
+		          duration: 250
+		        },
+		        hide: {
+		          effect: "fade",
+		          duration: 250
+		        },
+		      resizable: false,
+		      height: "auto",
+		      width: 400,
+		      modal: true,
+		      buttons: [
+		    	  {   text: 'Cerrar',
+			          click: function() {
+			        	  $(this).dialog( "close" )
+			          }
+		          }
+	          ]
+		    });
+			
+		   }
+		   
+		   
+		   /* @Función: MostrarPreguntaBorrarRegistro
+              @Detalle Función
+		   
+		      Esta función muestra un mensaje de diálogo informativo e interactivo 
+			  donde se le pregunta al usuario si quiere confirmar el borrado de un 
+			  registro, si el usuario da click en la x de salir, el registro no se
+			  borra pero si de da click en el botón de OK el registro es borrado 
+			  inmediatamente, el mensaje de dialogo es modal, es decir, no se deja 
+			  de mostrar sino hay una una acción del usuario, en este caso el botón
+			  de OK o la esquina derecha con la X. 			  
+
+              @Fin Detalle Función
+                                
+		      @Parametros 
+			  
+			  MensajeDialogo : Este parámetro es el mensaje que se le muestra al cliente
+			  que en su mayoría va a referenciar al ente o tabla del que se desea borrar el 
+			  registro
+			  
+			  Id : Es el valor del identificador del registro que se quiere borrar.
+			  
+			  Php : Es el nombre de la página php a la que se llama, esta tiene que ejecutar
+              el código necesario para borrar el registro.
+
+              Parametro : Es el valor del nombre del campo de la tabla con que se va a comparar
+              para borrar el registro y el valor es el campo Id descrito anteriormente.
+
+              Tabla : Indica el mantenimiento de la tabla que se va a hacer y a la pantalla
+              que debe ir después que elimine el registro exitósamente, por ejemplo 1 si eliminó
+              registros de la tabla dependencias ir a la pantalla de Mantenimiento Dependencias,
+			  2 si es de la tabla de Empresas.
+   			  			 
+		      @Fin parametros 
+		   */
+		  
+		  
+		    function MostrarPreguntaBorrarRegistro(MensajeDialogo,Id,Php,Parametro,Tabla) {
+
+			document.getElementById("Mensaje").textContent = MensajeDialogo;
+			
+		    $( "#dialog-mensaje" ).dialog({
+		        autoOpen: true,
+		        show: {
+		          effect: "fade",
+		          duration: 250
+		        },
+		        hide: {
+		          effect: "fade",
+		          duration: 250
+		        },
+		      resizable: false,
+		      height: "auto",
+		      width: 400,
+		      modal: true,
+		      buttons: [
+			  
+			  	  {   text: 'OK',
+			          click: function() {
+			        	  $(this).dialog( "close" )
+						  $.ajax({type: "GET", url: Php,
+                          data: Parametro+"="+Id,
+						  dataType: "text",
+                          success: function (msg) {
+						  if (Tabla==1){//Tabla es 1 cuando quiere eliminar un registro de la tabla de Dependencias		
+                           var result = $.trim(msg);						  
+						   if (result === "Esta dependencia fue Eliminada." ){
+					        IrMantoDependencias(msg);
+						   }
+						   else{ 
+						    IrEditarDependencias(Id,msg);						   
+						   }
+						  }else if (Tabla==2){//Tabla es 2 cuando quiere eliminar un registro de la tabla de Empresas		
+                           var result = $.trim(msg);						  
+						   if (result === "Esta empresa fue Eliminada." ){
+					        IrMantoEmpresas(msg);
+						   }else{ 
+						    IrEditarEmpresas(Id,msg);						   
+						   }
+						   }
+                          }, async: true
+                          })
+			          }				  					 					  					 
+		          				  					 					  					 
+		          }
+				  
+	          ]
+		    });
+  
+	       }
+		  
+		  
+		   /* @Función: MostrarPreguntaEnAgregarIrManto
+              @Detalle Función
+		   
+		      Esta función muestra un mensaje de diálogo informativo e interactivo 
+			  donde se le pregunta al usuario si quiere confirmar salir de una pantalla
+			  de agregado (pero podría ser de otro tipo) de un registro, si el usuario da
+			  click en la x de salir, el usuario permanece en la pantalla de agregado, si se da 
+			  click en el botón de OK el usuario va a la pantalla de mantenimiento que viene por el parámetro tabla.
+			  El mensaje de dialogo es modal, es decir, no se deja 
+			  de mostrar sino hay una una acción del usuario, en este caso el botón
+			  de OK o la esquina derecha con la X. 			  
+
+              @Fin Detalle Función
+                                
+		      @Parametros 
+			  
+			  MensajeDialogo : Este parámetro es el mensaje que se le muestra al cliente
+			  que en su mayoría va a referenciar la pantalla de agregado donde se encuentra
+			  en este momento el usuario.
+			  
+			  Id : Es el valor del identificador del registro que se quiere borrar.
+
+              Tabla : Indica el mantenimiento de la tabla donde se va a ir y es tipo entero, 
+              depende del numero sa va a la pantalla de mantenimiento que se indique por este 
+              parámetro. 			  
+			 
+		      @Fin parametros 
+		   */
+
+		  
+		  
+		    function MostrarPreguntaEnAgregarIrManto(MensajeDialogo,Tabla) {
+
+			document.getElementById("Mensaje").textContent = MensajeDialogo;
+			
+		    $( "#dialog-mensaje" ).dialog({
+		        autoOpen: true,
+		        show: {
+		          effect: "fade",
+		          duration: 250
+		        },
+		        hide: {
+		          effect: "fade",
+		          duration: 250
+		        },
+		      resizable: false,
+		      height: "auto",
+		      width: 400,
+		      modal: true,
+		      buttons: [
+			  
+			  	  {   text: 'OK',
+			          click: function() {
+			        	  $(this).dialog( "close" )
+						  if (Tabla==1){                 //1 es que va para mantenimiento de Dependencias
+					       IrMantoDependencias('');
+						  }else if (Tabla==2){           //2 es que va para mantenimiento de Personas 
+						   IrMantoPersonas('');
+						  }else if (Tabla==3){           //3 es que va para mantenimiento de Empresas 
+						   IrMantoEmpresas('');
+						  }else if (Tabla==4){           //4 es que va para mantenimiento de Usuarios
+						   IrMantoUsuarios('');	
+						  }else if (Tabla==5){           //5 es que va para mantenimiento de Sistemas
+						   IrMantoSistemas('');
+						  }
+			          }				  					 					  					           				  					 					  					 
+		          }			  
+	          ]
+		    });
+
+		  }
+		  		  
+		   /* @Función: verificar
+              @Detalle Función
+		   
+              Esta función es la primera función que se ejecuta de la página index.html ya que es la que se usa para
+			  verificar el usuario, esta función llama a la página php mantoSSO.php.
+              La idea es que esta función llame a otra función que verifique ya sea por tecnología LDAP
+			  o por base de datos el usuario pero esta función en este momento no ha sido implementada. 
+              Por eso al 1 de Julio 2021 se llama a la página principal de mantenimiento donde se le
+              da al usuario todas las opciones de mantenimentos de las tablas del sistema.	
+			  
+              @Fin Detalle Función                                
+		   */		  
+		  
+            function verificar() {
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "mantoSSO.php",
+                    data: "",
+                    success: function (msg) {
+                        tab = document.getElementById("tabla");
+                        padre = tab.parentNode;
+                        padre.removeChild(tab);
+                        $("#final").fadeIn("fast", function () {
+                            $("#final").html(msg);
+                        }
+                        )
+                    }, async: true
+                })
+            }
+			
+			
+		   /* @Función: IrMantoSSO
+              @Detalle Función
+		   
+              Esta función es la principal de la página index.html ya que es la que se usa para
+			  verificar el usuario, esta función llama a la página php mantoSSO.php al 1 de Julio 2021.
+              La idea es que esta función llame a otra función que verifique ya sea por tecnología LDAP
+			  o por base de datos el usuario pero esta función en este momento no ha sido implementada. 
+              Por eso al 1 de Julio 2021 se llama a la página principal de mantenimiento donde se le
+              da al usuario todas las opciones de mantenimentos de las tablas del sistema.		
+			  
+              @Fin Detalle Función                                
+		   */			
+			
+            function IrMantoSSO() {
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "mantoSSO.php",
+                    data: "",
+                    success: function (msg) {
+                        tab = document.getElementById("tabla");
+                        padre = tab.parentNode;
+                        padre.removeChild(tab);
+                        $("#final").fadeIn("fast", function () {
+                            $("#final").html(msg);
+                        }
+                        )
+                    }, async: true
+                })
+            }			
+			
+			
+		   /*******************************************DEPENDENCIAS**********************************************/
+		   
+		   
+			
+		   /* @Función: IrMantoDependencias
+              @Detalle Función
+		   
+			  Esta función muestra la página mantoDependencias.php utilizando el framework 			   
+              JQuery, se le envía un parámetro de Mensaje por si tiene que mostrar un mensaje
+              antes de mostrar los distintos botones y dependencias.
+              El mensaje puede ser o no enviado, si viene vacío simplemente muestra vacío pero
+              si viene lleno es porque normalmente se envió de la página de modificado y eliminado
+              de dependencias para mostrar al usuario que se eliminó modificó exitosamente alguna
+              dependencia.  			  
+		   
+              @Fin Detalle Función
+                                
+		      @Parametros 
+			  
+			  Mensaje : Este Mensaje es usado por si tiene que mostrar un mensaje
+              antes de mostrar los distintos botones y dependencias.
+              El mensaje puede ser o no enviado, si viene vacío simplemente muestra vacío pero
+              si viene lleno es porque normalmente se envió de la página de modificado y eliminado
+              de dependencias para mostrar al usuario que se eliminó modificó exitosamente alguna
+              dependencia  			  
+			 
+		      @Fin parametros 
+		   */
+
+			
+			function IrMantoDependencias(Mensaje) {
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "mantoDependencias.php",
+                    data: "Mensaje="+Mensaje,
+                    success: function (msg) {
+                        tab = document.getElementById("tabla");
+                        padre = tab.parentNode;
+                        padre.removeChild(tab);
+                        $("#final").fadeIn("fast", function () {
+                            $("#final").html(msg);
+                        }
+                        )
+                    }, async: true
+                })
+            }		
+			
+			
+		   /* @Función: IrEditarDependencias
+              @Detalle Función
+		   
+              Esta función lleva al usuario a la página SSO_EditarDependencias.php donde 
+              puede modificar o eliminar dependencias. Se le envía un parámetro de Mensaje 
+              para mostrarlo antes de mostrar los botones y la dependencia. 			  
+			  
+              @Fin Detalle Función  
+
+		      @Parametros 
+			  
+			  Mensaje : Este Mensaje es usado por si tiene que mostrar un mensaje
+              antes de mostrar los distintos botones y la dependecia.
+              El mensaje puede ser o no enviado, si viene vacío simplemente muestra vacío pero
+              si viene lleno es porque normalmente se envió de de alguna otra pantalla.  			  
+			 
+		      @Fin parametros 
+			  
+			  @Diagrama PHP: imgPHP/Dependencia/ModificarDependencia.png
+			  
+		   */				
+
+			function IrEditarDependencias(IdDependencia,Mensaje) {
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "SSO_EditarDependencias.php",
+                    data: "IdDependencia="+IdDependencia+"&Mensaje="+Mensaje,
+                    success: function (msg) {
+                        tab = document.getElementById("tabla");
+                        padre = tab.parentNode;
+                        padre.removeChild(tab);
+                        $("#final").fadeIn("fast", function () {
+                            $("#final").html(msg);
+                        }
+                        )
+                    }, async: true
+                })
+            }
+			
+
+		   /* @Función: IrAgregarDependencias
+              @Detalle Función
+		   
+              Esta función lleva al usuario a la página SSO_AgregarDependenciasNueva.php donde 
+              puede agregar dependencias. Se le envía un parámetro de Mensaje 
+              para mostrarlo antes de mostrar los botones y la dependencia y normalmente
+			  es enviado cuando se agrega una dependencia y se le quiere decir al usuario
+              que se agregó exitosamente. Además que se queda en la misma pantallla de
+              agregar dependencias y no tenga que salirse de esa pantalla.  			  
+			  
+              @Fin Detalle Función  
+
+		      @Parametros 
+			  
+			  Mensaje : Este Mensaje es usado por si tiene que mostrar un mensaje
+              antes de mostrar los distintos botones y controles para agregar una dependencia.
+              El mensaje puede ser o no enviado, si viene vacío simplemente muestra vacío pero
+              si viene lleno es porque normalmente se envió de de la misma pantalla de agregar
+			  dependencia ya que se quiere entrar en un ciclo de agregar dependencias y no salirse
+			  a otra pantallla.  			  
+			 
+		      @Fin parametros 
+			  
+			  @Diagrama PHP: imgPHP/Dependencia/AgregarDependencia.png
+			  
+		   */			
+			
+			function IrAgregarDependencias(Mensaje) {
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "SSO_AgregarDependenciasNueva.php",
+                    data: "Mensaje="+Mensaje,
+                    success: function (msg) {
+                        tab = document.getElementById("tabla");
+                        padre = tab.parentNode;
+                        padre.removeChild(tab);
+                        $("#final").fadeIn("fast", function () {
+                            $("#final").html(msg);
+                        }
+                        )
+                    }, async: true
+                })
+            }		
+
+
+		   /* @Función: GuardarDependencia
+              @Detalle Función
+		   
+              Esta función lleva al usuario a la página SSOGuardarDependencia.php donde 
+              se guarda la dependencia por una modificación que se haya hecho en los datos
+			  de la dependencia. Se verifica que ningún parámetro venga vacío y después se pasan los parámetros
+			  a la página php correspondiente.
+			  
+              @Fin Detalle Función  
+
+		      @Parametros 
+			  
+		      IdDependencia : Es la llave o id de la tabla dependencia por lo que se usa para
+			  encontrar el valor en el update como valor único.
+			  
+			  Dependencia : Nombre de la Dependencia del ICE.
+			  
+			  Estado : El estado de la dependencia ya sea activa o inactiva, es un parámetro 
+			  de tipo número.
+			  
+			  CentroFuncional : El Centro Funcional del ICE, es un campo de texto pero que ahora
+              es un campo de numero que identifica el centro funcional del ICE que es único para
+              una dependencia.			  
+			 
+		      @Fin parametros
+			  
+			  @Diagrama PHP: imgPHP/Dependencia/ModificarDependencia.png
+			  
+		   */	
+			
+			
+			function GuardarDependencia(IdDependencia,Dependencia,Estado,CentroFuncional) {
+			
+			if (Dependencia.length == 0 ){
+			 MostrarMensajeInformativo("La Dependencia es requerida.");
+			}else if (Estado.length == 0 ){
+			 MostrarMensajeInformativo("El Estado es requerido.");
+			}else if (CentroFuncional.length == 0 ){
+			 MostrarMensajeInformativo("El Centro Funcional es requerido.");
+			}else{
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "SSOGuardarDependencia.php",
+                    data: "IdDependencia="+IdDependencia+"&Dependencia="+Dependencia+"&Estado="+Estado+"&CentroFuncional="+CentroFuncional,
+                    success: function (msg) {	
+                     var result = $.trim(msg);						  
+					 if (result === "La dependencia fue Modificada." ){
+					   IrMantoDependencias(msg);
+				     }
+					 else{ 
+					  IrEditarDependencias(IdDependencia,msg);						   
+				     }										
+                    }, async: true
+                })						 						
+            }
+			
+			}
+			
+			
+			function GuardarDependenciaRest(IdDependencia,Dependencia,Estado,CentroFuncional) {
+			
+			if (Dependencia.length == 0 ){
+			 MostrarMensajeInformativo("La Dependencia es requerida.");
+			}else if (Estado.length == 0 ){
+			 MostrarMensajeInformativo("El Estado es requerido.");
+			}else if (CentroFuncional.length == 0 ){
+			 MostrarMensajeInformativo("El Centro Funcional es requerido.");
+			}else{
+                $("#final").fadeOut("fast");
+                $.ajax({type: "POST", url: "http://10.159.49.173:8080/api/v1/Dependencia",
+                    //data: "IdDependencia="+IdDependencia+"&Dependencia="+Dependencia+"&Estado="+Estado+"&CentroFuncional="+CentroFuncional,
+					//{"dependencia":"Soporte a las Operaciones","estado":1,"centrofuncional":"4565"}
+					data: "{\"dependencia\": \""+Dependencia+"\",\"estado\":"+Estado+",\"centrofuncional\": \""+CentroFuncional+"\"}",
+                    success: function (msg) {	
+                     var result = $.trim(msg);						  
+					 if (result === "La dependencia fue Modificada." ){
+					   IrMantoDependencias(msg);
+				     }
+					 else{ 
+					  IrEditarDependencias(IdDependencia,msg);						   
+				     }										
+                    }, async: true
+                })						 						
+            }
+			
+			}
+			
+			
+			
+			
+			
+			
+		   /* @Función: EliminarDependencia
+              @Detalle Función
+		   
+              Esta función pregunta primero si el id de la dependencia viene vacío 
+              o viene con valores, si el valor viene lleno se llama a la función 
+              MostrarPreguntaBorrarRegistro para verificar que el usuario quiere 
+              eliminar el registro, se le envía el parámetro 1 que indica a esta
+			  función que debe ir a la pantalla de mantenimiento de dependencias
+              después que elimina la dependencia.			  
+              			  
+			  
+              @Fin Detalle Función  
+
+		      @Parametros 
+			  
+		      IdDependencia : Es la llave o id de la tabla dependencia por lo que se usa para
+			  encontrar el valor en el update como valor único.
+		  			 
+		      @Fin parametros
+			  
+			  @Diagrama PHP: imgPHP/Dependencia/EliminarDependencia.png
+			  
+		   */				
+			
+			
+			function EliminarDependencia(IdDependencia) {
+			
+			if (IdDependencia.length == 0 ){
+			 MostrarMensajeInformativo("El Identificador de Dependencia es requerido.");
+			}else{
+			 MostrarPreguntaBorrarRegistro("Desea Eliminar esta Dependencia?",IdDependencia,"SSOEliminarDependencia.php","IdDependencia",1);			
+			 }							
+            }
+			
+			
+		   /* @Función: AgregarDependencia
+              @Detalle Función
+		   
+              Esta función lleva al usuario a la página SSOAgregarDependencia.php donde 
+              se agrega la dependencia, se verifica que ningún parámetro venga vacío y después se pasan los parámetros
+			  a la página php correspondiente.	El Id de la dependencia es insertada por una secuencia de la tabla 
+              automáticamente.			  
+              			  
+			  
+              @Fin Detalle Función  
+
+		      @Parametros 
+			  
+			  Dependencia : Nombre de la Dependencia del ICE.
+			  
+			  Estado : El estado de la dependencia ya sea activa o inactiva, es un parámetro 
+			  de tipo número.
+			  
+			  CentroFuncional : El Centro Funcional del ICE, es un campo de texto pero que ahora
+              es un campo de numero que identifica el centro funcional del ICE que es único para
+              una dependencia.	
+		  			 
+		      @Fin parametros
+			  
+			  @Diagrama PHP: imgPHP/Dependencia/AgregarDependencia.png
+			  
+		   */				
+			
+			function AgregarDependencia(Dependencia,Estado,CentroFuncional) {
+			
+			if (Dependencia.length == 0 ){
+			 MostrarMensajeInformativo("La Dependencia es requerida.");
+			}else if (Estado.length == 0 ){
+			 MostrarMensajeInformativo("El Estado es requerido.");
+			}else if (CentroFuncional.length == 0 ){
+			 MostrarMensajeInformativo("El Centro Funcional es requerido.");
+			}else{    
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "SSOAgregarDependencia.php",
+                    data: "Dependencia="+Dependencia+"&Estado="+Estado+"&CentroFuncional="+CentroFuncional,
+                    success: function (msg) {
+					IrAgregarDependencias(msg);
+                    }, async: true
+                })									
+            }					
+			}	
+			
+			
+			/*******************************************PERSONAS**********************************************/
+			
+			
+		   /* @Función: IrMantoPersonas
+              @Detalle Función
+		   
+			  Esta función muestra la página mantoPersonas.php utilizando el framework 			   
+              JQuery, se le envía un parámetro de Mensaje por si tiene que mostrar un mensaje
+              antes de mostrar los distintos botones y personas.
+              El mensaje puede ser o no enviado, si viene vacío simplemente muestra vacío pero
+              si viene lleno es porque normalmente se envió de la página de modificado y eliminado
+              de personas para mostrar al usuario que se eliminó o modificó exitosamente alguna
+              persona.  			  
+		   
+              @Fin Detalle Función
+                                
+		      @Parametros 
+			  
+			  Mensaje : Este Mensaje es usado por si tiene que mostrar un mensaje
+              antes de mostrar los distintos botones y personas.
+              el mensaje puede ser o no enviado, si viene vacío simplemente muestra vacío pero
+              si viene lleno es porque normalmente se envió de la página de modificado y eliminado
+              de personas para mostrar al usuario que se eliminó modificó exitosamente alguna
+              persona.  			  
+			 
+		      @Fin parametros 
+		   */			
+						
+			function IrMantoPersonas(Mensaje) {
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "mantoPersonas.php",
+                    data: "Mensaje="+Mensaje,
+                    success: function (msg) {
+                        tab = document.getElementById("tabla");
+                        padre = tab.parentNode;
+                        padre.removeChild(tab);
+                        $("#final").fadeIn("fast", function () {
+                            $("#final").html(msg);
+                        }
+                        )
+                    }, async: true
+                })
+            }		
+			
+			
+		   /* @Función: IrEditarPersonas
+              @Detalle Función
+		   
+              Esta función lleva al usuario a la página SSO_EditarPersonas.php donde 
+              puede modificar los datos de las personas. Se le envía un parámetro de Mensaje 
+              para mostrarlo antes de mostrar los botones y los datos de la persona y antes de
+              este el id de la persona.			  
+			  
+              @Fin Detalle Función  
+
+		      @Parametros 
+			  
+			  IdPersona : Identificador de la persona que se va a mostrar para modificar sus 
+			  datos, puede ser la cédula o el pasaporte.
+			  
+			  Mensaje : Este Mensaje es usado por si tiene que mostrar un mensaje
+              antes de mostrar los distintos botones y los datos de la persona.
+              El mensaje puede ser o no enviado, si viene vacío simplemente muestra vacío pero
+              si viene lleno es porque normalmente se envió de de alguna otra pantalla, en este 
+              caso de este sistema de modificado porque no existe el borrado de personas.  			  
+			 
+		      @Fin parametros 
+			  
+			  @Diagrama PHP: imgPHP/Persona/ModificarPersona.png
+			  
+		   */				
+
+			function IrEditarPersonas(IdPersona,Mensaje) {
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "SSO_EditarPersonas.php",
+                    data: "IdPersona="+IdPersona+"&Mensaje="+Mensaje,
+                    success: function (msg) {
+                        tab = document.getElementById("tabla");
+                        padre = tab.parentNode;
+                        padre.removeChild(tab);
+                        $("#final").fadeIn("fast", function () {
+                            $("#final").html(msg);
+                        }
+                        )
+                    }, async: true
+                })
+            }
+			
+
+		   /* @Función: IrAgregarPersonas
+              @Detalle Función
+		   
+              Esta función lleva al usuario a la página SSO_AgregarPersonasNueva.php donde 
+              puede agregar personas. Se le envía un parámetro de Mensaje 
+              para mostrarlo antes de mostrar los botones y la persona y normalmente
+			  es enviado cuando se agrega una persona y se le quiere decir al usuario
+              que se agregó exitosamente. Además que se queda en la misma pantalla de
+              agregar personas para poder agregar mas personas sin tener que salirse de esa pantalla.  			  
+			  
+              @Fin Detalle Función  
+
+		      @Parametros 
+			  
+			  Mensaje : Este Mensaje es usado por si tiene que mostrar un mensaje
+              antes de mostrar los distintos botones y controles para agregar una persona.
+              El mensaje puede ser o no enviado, si viene vacío simplemente muestra vacío pero
+              si viene lleno es porque normalmente se envió de de la misma pantalla de agregar
+			  persona ya que se quiere entrar en un ciclo de agregar personas y no salirse
+			  a otra pantalla.  			  
+			 
+		      @Fin parametros 
+			  
+			  @Diagrama PHP: imgPHP/Persona/AgregarPersona.png
+			  
+		   */			
+			
+			function IrAgregarPersonas(Mensaje) {
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "SSO_AgregarPersonasNueva.php",
+                    data: "Mensaje="+Mensaje,
+                    success: function (msg) {
+                        tab = document.getElementById("tabla");
+                        padre = tab.parentNode;
+                        padre.removeChild(tab);
+                        $("#final").fadeIn("fast", function () {
+                            $("#final").html(msg);
+                        }
+                        )
+                    }, async: true
+                })
+            }			
+			
+
+		   /* @Función: GuardarPersona
+              @Detalle Función
+		   
+              Esta función lleva al usuario a la página SSOGuardarPersona.php donde 
+              se guarda la persona por una modificación que se haya hecho en los datos
+			  de la persona. Se verifica que ningún parámetro venga vacío y después se pasan los parámetros
+			  a la página php correspondiente.
+			  
+              @Fin Detalle Función  
+
+		      @Parametros 
+			  
+		      IdPersona : Es la llave o id de la tabla persona por lo que se usa para
+			  encontrar el valor en el update como valor único.
+			  
+			  Nombre : Nombre de la persona.
+			  
+			  PrimerApellido : Primer Apellido de la Persona.
+			  
+			  SegundoApellido : Segundo Apellido de la Persona.
+			  
+			  TelefonoFijo : Teléfono Fijo  de la Persona.
+			  
+			  TelefonoCelular : Teléfono Celular de la Persona.
+			  
+			  IdEmpresa : Identificador de la empresa a la que pertenece la persona.
+			  
+			  Email : Email  de la Persona.
+			  
+			  IdDependencia : Id de la Dependencia a la que pertenece la persona.
+			  
+			  Estado : El estado de la persona ya sea activo, inactivo o incapacitado, es un parámetro 
+			  de tipo número entero.
+			  
+			 
+		      @Fin parametros
+			  
+			  @Diagrama PHP: imgPHP/Persona/ModificarPersona.png
+			  
+		   */	
+			
+			
+			function GuardarPersona(IdPersona,Nombre,PrimerApellido,SegundoApellido,TelefonoFijo,TelefonoCelular,IdDependencia,Estado,IdEmpresa,Email) {
+					
+			if (Nombre.length == 0 ){
+			 MostrarMensajeInformativo("El Nombre de Persona es requerido."); 
+            }else if (PrimerApellido.length == 0 ){
+			 MostrarMensajeInformativo("El Primer Apellido de Persona es requerido.");			 
+            }else if (SegundoApellido.length == 0 ){
+			 MostrarMensajeInformativo("El Segundo Apellido es requerido.");				 
+			}else if (IdPersona.length == 0 ){
+			 MostrarMensajeInformativo("El Id de Persona es requerido.");
+			}else if (IdDependencia.length == 0 ){
+			 MostrarMensajeInformativo("La Dependencia es requerida."); 
+			}else if (Estado.length == 0 ){
+			 MostrarMensajeInformativo("El Estado es requerido.");
+			}else if (IdEmpresa.length == 0 ){
+			 MostrarMensajeInformativo("La Empresa es requerido.");
+			}else if (Email.length == 0 ){
+			 MostrarMensajeInformativo("El Email es requerido."); 
+			}else if (TelefonoCelular.length == 0 && TelefonoFijo.length == 0  ){
+			 MostrarMensajeInformativo("Debe llenarse uno de los dos telefonos ya sea el fijo o el celular."); 			 
+			}else{
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "SSOGuardarPersona.php",
+                    data: "IdPersona="+IdPersona+"&Nombre="+Nombre+"&PrimerApellido="+PrimerApellido+"&SegundoApellido="+SegundoApellido+"&TelefonoFijo="+TelefonoFijo+"&TelefonoCelular="+TelefonoCelular+"&IdDependencia="+IdDependencia+"&Estado="+Estado+"&IdEmpresa="+IdEmpresa+"&Email="+Email,
+                    success: function (msg) {
+					IrMantoPersonas(msg);
+                    }, async: true
+                })						 						
+            }		
+			}
+			
+						
+		   /* @Función: AgregarPersona
+              @Detalle Función
+		   
+              Esta función lleva al usuario a la página SSOAgregarPersona.php donde 
+              se agrega la persona por medio de una sentencia SQL, después se llama
+              a la función IrAgregarPersonas que muestra un mensaje con el valor de lo que
+              pasó en la inserción. Se pasa por medio del parámetro msg.			  
+			  Se verifica que ningún parámetro venga vacío y después se pasan los parámetros
+			  a la página php correspondiente.			  
+              			  
+              @Fin Detalle Función  
+
+		      @Parametros 
+			  
+		      IdPersona : Es la llave o id de la tabla persona que se va a insertar, en 
+			  este caso puede ser el # de cédula o pasaporte.
+			  
+			  Nombre : Nombre de la persona.
+			  
+			  PrimerApellido : Primer Apellido de la Persona.
+			  
+			  SegundoApellido : Segundo Apellido de la Persona.
+			  
+			  TelefonoFijo : Teléfono Fijo  de la Persona.
+			  
+			  TelefonoCelular : Teléfono Celular de la Persona.
+			  
+			  Empresa : Identificador de la empresa a la que pertenece la persona.
+			  
+			  Email : Email  de la Persona.
+			  
+			  IdDependencia : Id de la Dependencia a la que pertenece la persona.
+			  
+			  Estado : El estado de la persona ya sea activo, inactivo o incapacitado, es un parámetro 
+			  de tipo número entero.
+		  			 
+		      @Fin parametros
+			  
+			  @Diagrama PHP: imgPHP/Dependencia/AgregarDependencia.png
+			  
+		   */				
+			
+			function AgregarPersona(IdPersona,Nombre,PrimerApellido,SegundoApellido,TelefonoFijo,TelefonoCelular,Dependencia,Estado,Empresa,Email) {							
+					
+			if (IdPersona.length === 0 ){
+			 MostrarMensajeInformativo("El Id de la persona es requerido.");		
+			}else if (Nombre.length === 0 ){
+			 MostrarMensajeInformativo("El Nombre de la persona es requerido.");	
+			}else if (PrimerApellido.length === 0 ){
+			 MostrarMensajeInformativo("El Primer Apellido es requerido.");	
+			}else if (SegundoApellido.length === 0 ){
+			 MostrarMensajeInformativo("El Segundo Apellido es requerido.");				 
+			}else if (Dependencia == 0 ){
+			 MostrarMensajeInformativo("La Dependencia es requerida.");
+			}else if (Empresa == 0 ){
+			 MostrarMensajeInformativo("La Empresa es requerida.");
+			}else if (Email== 0 ){
+			 MostrarMensajeInformativo("El Email es requerido.");	
+			}else if (TelefonoCelular.length == 0 && TelefonoFijo.length == 0  ){
+			 MostrarMensajeInformativo("Debe llenarse uno de los dos telefonos ya sea el fijo o el celular."); 				 
+			}else{    
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "SSOAgregarPersona.php",
+                    data: "IdPersona="+IdPersona+"&Nombre="+Nombre+"&PrimerApellido="+PrimerApellido+"&SegundoApellido="+SegundoApellido+"&TelefonoFijo="+TelefonoFijo+"&TelefonoCelular="+TelefonoCelular+"&Dependencia="+Dependencia+"&Estado="+Estado+"&Empresa="+Empresa+"&Email="+Email,
+                    success: function (msg) {
+					IrAgregarPersonas(msg);
+                    }, async: true
+                })									
+            }					
+			}
+
+
+		   /*******************************************EMPRESAS**********************************************/
+		   
+		   
+			
+		   /* @Función: IrMantoEmpresas
+              @Detalle Función
+		   
+			  Esta función muestra la página mantoEmpresas.php utilizando el framework 			   
+              JQuery, se le envía un parámetro de Mensaje por si tiene que mostrar un mensaje
+              antes de mostrar los distintos botones y empresas.
+              El mensaje puede ser o no enviado, si viene vacío simplemente muestra vacío pero
+              si viene lleno es porque normalmente se envió de la página de modificado y eliminado
+              de Empresas para mostrar al usuario que se eliminó modificó exitosamente alguna
+              Empresas.  			  
+		   
+              @Fin Detalle Función
+                                
+		      @Parametros 
+			  
+			  Mensaje : Este Mensaje es usado por si tiene que mostrar un mensaje
+              antes de mostrar los distintos botones y Empresas.
+              El mensaje puede ser o no enviado, si viene vacío simplemente muestra vacío pero
+              si viene lleno es porque normalmente se envió de la página de modificado y eliminado
+              de Empresas para mostrar al usuario que se eliminó modificó exitosamente alguna
+              Empresa.  			  
+			 
+		      @Fin parametros 
+		   */
+
+			
+			function IrMantoEmpresas(Mensaje) {
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "mantoEmpresas.php",
+                    data: "Mensaje="+Mensaje,
+                    success: function (msg) {
+                        tab = document.getElementById("tabla");
+                        padre = tab.parentNode;
+                        padre.removeChild(tab);
+                        $("#final").fadeIn("fast", function () {
+                            $("#final").html(msg);
+                        }
+                        )
+                    }, async: true
+                })
+
+            }		
+			
+			
+		   /* @Función: IrEditarEmpresas
+              @Detalle Función
+		   
+              Esta función lleva al usuario a la página SSO_EditarDependencias.php donde 
+              puede modificar o eliminar dependencias. Se le envía un parámetro de Mensaje 
+              para mostrarlo antes de mostrar los botones y la dependencia. 			  
+			  
+              @Fin Detalle Función  
+
+		      @Parametros 
+			  
+			  IdEmpresa : El Identificador de la Empresa que se va a editar para traerla
+              y modificarla o eliminarla. 			  
+			  
+			  Mensaje : Este Mensaje es usado por si tiene que mostrar un mensaje
+              antes de mostrar los distintos botones y la dependecia.
+              El mensaje puede ser o no enviado, si viene vacío simplemente muestra vacío pero
+              si viene lleno es porque normalmente se envió de de alguna otra pantalla.  			  
+			 
+		      @Fin parametros 
+			  
+			  @Diagrama PHP: imgPHP/Empresa/ModificarEmpresa.png
+			  
+		   */				
+
+			function IrEditarEmpresas(IdEmpresa,Mensaje) {
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "SSO_EditarEmpresas.php",
+                    data: "IdEmpresa="+IdEmpresa+"&Mensaje="+Mensaje,
+                    success: function (msg) {
+                        tab = document.getElementById("tabla");
+                        padre = tab.parentNode;
+                        padre.removeChild(tab);
+                        $("#final").fadeIn("fast", function () {
+                            $("#final").html(msg);
+                        }
+                        )
+                    }, async: true
+                })
+            }
+			
+
+		   /* @Función: IrAgregarEmpresas
+              @Detalle Función
+		   
+              Esta función lleva al usuario a la página SSO_AgregarEmpresasNueva.php donde 
+              puede agregar Empresas. Se le envía un parámetro de Mensaje 
+              para mostrarlo antes de mostrar los botones y la Empresa y normalmente
+			  es enviado cuando se agrega una Empresa y se le quiere decir al usuario
+              que se agregó exitosamente. Además que se queda en la misma pantallla de
+              agregar Empresas y no tenga que salirse de esa pantalla.  			  
+			  
+              @Fin Detalle Función  
+
+		      @Parametros 
+			  
+			  Mensaje : Este Mensaje es usado por si tiene que mostrar un mensaje
+              antes de mostrar los distintos botones y controles para agregar una Empresa.
+              El mensaje puede ser o no enviado, si viene vacío simplemente muestra vacío pero
+              si viene lleno es porque normalmente se envió de de la misma pantalla de agregar
+			  Empresas ya que se quiere entrar en un ciclo de agregar Empresas y no salirse
+			  a otra pantallla.  			  
+			 
+		      @Fin parametros 
+			  
+			  @Diagrama PHP: imgPHP/Empresas/AgregarEmpresa.png
+			  
+		   */			
+			
+			function IrAgregarEmpresas(Mensaje) {
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "SSO_AgregarEmpresasNueva.php",
+                    data: "Mensaje="+Mensaje,
+                    success: function (msg) {
+                        tab = document.getElementById("tabla");
+                        padre = tab.parentNode;
+                        padre.removeChild(tab);
+                        $("#final").fadeIn("fast", function () {
+                            $("#final").html(msg);
+                        }
+                        )
+                    }, async: true
+                })
+            }			
+			
+
+		   /* @Función: GuardarEmpresas
+              @Detalle Función
+		   
+              Esta función lleva al usuario a la página SSOGuardarEmpresas.php donde 
+              se guarda la Empresa por una modificación que se haya hecho en los datos
+			  de la Empresa. Se verifica que ningún parámetro venga vacío y después se pasan los parámetros
+			  a la página php correspondiente.
+			  
+              @Fin Detalle Función  
+
+		      @Parametros 
+			  
+		      IdEmpresa : Es la llave o id de la tabla Empresa por lo que se usa para
+			  encontrar el valor en el update como valor único.
+			  
+			  Empresa : Nombre de la Empresa ya sea ICE u otra.
+			  
+			  Estado : El estado de la Empresa ya sea activa o inactiva, es un parámetro 
+			  de tipo número.
+			  			 
+		      @Fin parametros
+			  
+			  @Diagrama PHP: imgPHP/Empresa/ModificarEmpresa.png
+			  
+		   */	
+			
+			
+			function GuardarEmpresa(IdEmpresa,Empresa,Estado) {
+			
+			if (Empresa.length == 0 ){
+			 MostrarMensajeInformativo("La Empresa es requerida.");
+			}else if (Estado.length == 0 ){
+			 MostrarMensajeInformativo("El Estado es requerido.");
+			}else if (IdEmpresa.length == 0 ){
+			 MostrarMensajeInformativo("El Id de la Empresa es requerido.");
+			}else{
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "SSOGuardarEmpresa.php",
+                    data: "IdEmpresa="+IdEmpresa+"&NombreEmpresa="+Empresa+"&Estado="+Estado,
+                    success: function (msg) {	
+                     var result = $.trim(msg);						  
+					 if (result === "La Empresa fue Modificada." ){
+					   IrMantoEmpresas(msg);
+				     }
+					 else{ 
+					  IrEditarEmpresas(IdEmpresa,msg);						   
+				     }										
+                    }, async: true
+                })						 						
+            }
+			
+			}
+			
+			
+			
+			
+		   /* @Función: EliminarEmpresa
+              @Detalle Función
+		   
+              Esta función pregunta primero si el id de la Empresa viene vacío 
+              o viene con valores, si el valor viene lleno se llama a la función 
+              MostrarPreguntaBorrarRegistro para verificar que el usuario quiere 
+              eliminar el registro, se le envía el parámetro 1 que indica a esta
+			  función que debe ir a la pantalla de mantenimiento de Empresas
+              después que elimina la Empresa.			  
+              			  			  
+              @Fin Detalle Función  
+
+		      @Parametros 
+			  
+		      IdEmpresa : Es la llave o id de la tabla Empresa por lo que se usa para
+			  encontrar el valor en el update como valor único.
+		  			 
+		      @Fin parametros
+			  
+			  @Diagrama PHP: imgPHP/Empresa/EliminarEmpresa.png
+			  
+		   */				
+			
+			
+			function EliminarEmpresa(IdEmpresa) {
+			
+			if (IdEmpresa.length == 0 ){
+			 MostrarMensajeInformativo("El Identificador de Empresa es requerido.");
+			}else{
+			 MostrarPreguntaBorrarRegistro("Desea Eliminar esta Empresa?",IdEmpresa,"SSOEliminarEmpresa.php","IdEmpresa",2);			
+			 }							
+            }
+						
+		   /* @Función: AgregarEmpresa
+              @Detalle Función
+		   
+              Esta función lleva al usuario a la página SSOAgregarEmpresa.php donde 
+              se agrega la Empresa, se verifica que ningún parámetro venga vacío y después se pasan los parámetros
+			  a la página php correspondiente.	El Id de la Empresa es insertada por una secuencia de la tabla 
+              automáticamente.			  
+              			  			  
+              @Fin Detalle Función  
+
+		      @Parametros 
+			  
+			  Empresa : Nombre de la Empresa.
+			  
+			  Estado : El estado de la Empresa ya sea activa o inactiva, es un parámetro 
+			  de tipo número.
+		  			 
+		      @Fin parametros
+			  
+			  @Diagrama PHP: imgPHP/Empresa/AgregarEmpresa.png
+			  
+		   */				
+			
+			function AgregarEmpresa(Empresa,Estado) {
+			
+			if (Empresa.length == 0 ){
+			 MostrarMensajeInformativo("La Empresa es requerida.");
+			}else if (Estado.length == 0 ){
+			 MostrarMensajeInformativo("El Estado es requerido.");
+			}else{    
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "SSOAgregarEmpresa.php",
+                    data: "Empresa="+Empresa+"&Estado="+Estado,
+                    success: function (msg) {
+					IrAgregarEmpresas(msg);
+                    }, async: true
+                })									
+            }					
+			}	
+					
+					
+					
+		   /*******************************************SISTEMAS**********************************************/
+		   
+		   
+			
+		   /* @Función: IrMantoSistemas
+              @Detalle Función
+		   
+			  Esta función muestra la página mantoSistemas.php utilizando el framework 			   
+              JQuery, se le envía un parámetro de Mensaje por si tiene que mostrar un mensaje
+              antes de mostrar los distintos botones y Sistemas.
+              El mensaje puede ser o no enviado, si viene vacío simplemente muestra vacío pero
+              si viene lleno es porque normalmente se envió de la página de modificado
+              de Sistemas para mostrar al usuario que se modificó exitosamente algun
+              Sistema.  			  
+		   
+              @Fin Detalle Función
+                                
+		      @Parametros 
+			  
+			  Mensaje : Este Mensaje es usado por si tiene que mostrar un mensaje
+              antes de mostrar los distintos botones y Sistemas.
+              El mensaje puede ser o no enviado, si viene vacío simplemente muestra vacío pero
+              si viene lleno es porque normalmente se envió de la página de modificado de Sistemas
+			  para mostrar al usuario que se modificó exitosamente algun Sistema.  			  
+			 
+		      @Fin parametros 
+		   */
+
+			
+			function IrMantoSistemas(Mensaje) {
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "mantoSistemas.php",
+                    data: "Mensaje="+Mensaje,
+                    success: function (msg) {
+                        tab = document.getElementById("tabla");
+                        padre = tab.parentNode;
+                        padre.removeChild(tab);
+                        $("#final").fadeIn("fast", function () {
+                            $("#final").html(msg);
+                        }
+                        )
+                    }, async: true
+                })
+
+            }		
+			
+			
+		   /* @Función: IrEditarEmpresas
+              @Detalle Función
+		   
+              Esta función lleva al usuario a la página SSO_EditarDependencias.php donde 
+              puede modificar o eliminar dependencias. Se le envía un parámetro de Mensaje 
+              para mostrarlo antes de mostrar los botones y la dependencia. 			  
+			  
+              @Fin Detalle Función  
+
+		      @Parametros 
+			  
+			  IdEmpresa : El Identificador de la Empresa que se va a editar para traerla
+              y modificarla o eliminarla. 			  
+			  
+			  Mensaje : Este Mensaje es usado por si tiene que mostrar un mensaje
+              antes de mostrar los distintos botones y la dependecia.
+              El mensaje puede ser o no enviado, si viene vacío simplemente muestra vacío pero
+              si viene lleno es porque normalmente se envió de de alguna otra pantalla.  			  
+			 
+		      @Fin parametros 
+			  
+			  @Diagrama PHP: imgPHP/Empresa/ModificarEmpresa.png
+			  
+		   */				
+
+			function IrEditarSistemas(IdSistema,Mensaje) {
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "SSO_EditarSistemas.php",
+                    data: "IdSistema="+IdSistema+"&Mensaje="+Mensaje,
+                    success: function (msg) {
+                        tab = document.getElementById("tabla");
+                        padre = tab.parentNode;
+                        padre.removeChild(tab);
+                        $("#final").fadeIn("fast", function () {
+                            $("#final").html(msg);
+                        }
+                        )
+                    }, async: true
+                })
+            }
+			
+
+		   /* @Función: IrAgregarEmpresas
+              @Detalle Función
+		   
+              Esta función lleva al usuario a la página SSO_AgregarEmpresasNueva.php donde 
+              puede agregar Empresas. Se le envía un parámetro de Mensaje 
+              para mostrarlo antes de mostrar los botones y la Empresa y normalmente
+			  es enviado cuando se agrega una Empresa y se le quiere decir al usuario
+              que se agregó exitosamente. Además que se queda en la misma pantallla de
+              agregar Empresas y no tenga que salirse de esa pantalla.  			  
+			  
+              @Fin Detalle Función  
+
+		      @Parametros 
+			  
+			  Mensaje : Este Mensaje es usado por si tiene que mostrar un mensaje
+              antes de mostrar los distintos botones y controles para agregar una Empresa.
+              El mensaje puede ser o no enviado, si viene vacío simplemente muestra vacío pero
+              si viene lleno es porque normalmente se envió de de la misma pantalla de agregar
+			  Empresas ya que se quiere entrar en un ciclo de agregar Empresas y no salirse
+			  a otra pantallla.  			  
+			 
+		      @Fin parametros 
+			  
+			  @Diagrama PHP: imgPHP/Empresas/AgregarEmpresa.png
+			  
+		   */			
+			
+			function IrAgregarSistemas(Mensaje) {
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "SSO_AgregarSistemasNueva.php",
+                    data: "Mensaje="+Mensaje,
+                    success: function (msg) {
+                        tab = document.getElementById("tabla");
+                        padre = tab.parentNode;
+                        padre.removeChild(tab);
+                        $("#final").fadeIn("fast", function () {
+                            $("#final").html(msg);
+                        }
+                        )
+                    }, async: true
+                })
+            }			
+			
+
+		   /* @Función: GuardarEmpresas
+              @Detalle Función
+		   
+              Esta función lleva al usuario a la página SSOGuardarEmpresas.php donde 
+              se guarda la Empresa por una modificación que se haya hecho en los datos
+			  de la Empresa. Se verifica que ningún parámetro venga vacío y después se pasan los parámetros
+			  a la página php correspondiente.
+			  
+              @Fin Detalle Función  
+
+		      @Parametros 
+			  
+		      IdEmpresa : Es la llave o id de la tabla Empresa por lo que se usa para
+			  encontrar el valor en el update como valor único.
+			  
+			  Empresa : Nombre de la Empresa ya sea ICE u otra.
+			  
+			  Estado : El estado de la Empresa ya sea activa o inactiva, es un parámetro 
+			  de tipo número.
+			  			 
+		      @Fin parametros
+			  
+			  @Diagrama PHP: imgPHP/Empresa/ModificarEmpresa.png			  
+		   */	
+						
+			function GuardarSistema(IdSistema,NombreSistema,Estado,Metodo) {
+			
+			if (NombreSistema.length == 0 ){
+			 MostrarMensajeInformativo("El Nombre del Sistema es requerido.");
+			}else if (Estado.length == 0 ){
+			 MostrarMensajeInformativo("El Estado es requerido.");
+			}else if (Metodo.length == 0 ){
+			 MostrarMensajeInformativo("El Método de Autenticación del Sistema es requerido.");
+			}else{
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "SSOGuardarSistema.php",
+                    data: "IdSistema="+IdSistema+"&NombreSistema="+NombreSistema+"&Estado="+Estado+"&Metodo="+Metodo,
+                    success: function (msg) {	
+                     var result = $.trim(msg);						  
+					 if (result === "El Sistema fue Modificado." ){
+					   IrMantoSistemas(msg);
+				     }
+					 else{ 
+					  IrEditarSistemas(IdSistema,msg);						   
+				     }										
+                    }, async: true
+                })						 						
+            }
+			
+			}
+									
+		   /* @Función: AgregarSistema
+              @Detalle Función
+		   
+              Esta función lleva al usuario a la página SSOAgregarEmpresa.php donde 
+              se agrega la Empresa, se verifica que ningún parámetro venga vacío y después se pasan los parámetros
+			  a la página php correspondiente.	El Id de la Empresa es insertada por una secuencia de la tabla 
+              automáticamente.			  
+              			  			  
+              @Fin Detalle Función  
+
+		      @Parametros 
+			  
+			  Empresa : Nombre de la Empresa.
+			  
+			  Estado : El estado de la Empresa ya sea activa o inactiva, es un parámetro 
+			  de tipo número.
+		  			 
+		      @Fin parametros
+			  
+			  @Diagrama PHP: imgPHP/Empresa/AgregarEmpresa.png
+			  
+		   */				
+			
+			function AgregarSistema(NombreSistema,Metodo,Estado) {
+			
+			if (NombreSistema.length == 0 ){
+			 MostrarMensajeInformativo("El Nombre del Sistema es requerido.");
+			}else if (Metodo.length == 0 || Metodo == 0 ){
+			 MostrarMensajeInformativo("El metodo es requerido.");			 		
+			}else if (Estado.length == 0 ){
+			 MostrarMensajeInformativo("El Estado es requerido.");
+			}else{    
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "SSOAgregarSistema.php",
+                    data: "NombreSistema="+NombreSistema+"&Metodo="+Metodo+"&Estado="+Estado,
+                    success: function (msg) {
+					IrAgregarSistemas(msg);
+                    }, async: true
+                })									
+            }					
+			}	
+			
+		   /*******************************************USUARIOS**********************************************/
+		   
+		   
+			
+		   /* @Función: IrMantoUsuarios
+              @Detalle Función
+		   
+			  Esta función muestra la página mantoEmpresas.php utilizando el framework 			   
+              JQuery, se le envía un parámetro de Mensaje por si tiene que mostrar un mensaje
+              antes de mostrar los distintos botones y empresas.
+              El mensaje puede ser o no enviado, si viene vacío simplemente muestra vacío pero
+              si viene lleno es porque normalmente se envió de la página de modificado y eliminado
+              de Empresas para mostrar al usuario que se eliminó modificó exitosamente alguna
+              Empresas.  			  
+		   
+              @Fin Detalle Función
+                                
+		      @Parametros 
+			  
+			  Mensaje : Este Mensaje es usado por si tiene que mostrar un mensaje
+              antes de mostrar los distintos botones y Empresas.
+              El mensaje puede ser o no enviado, si viene vacío simplemente muestra vacío pero
+              si viene lleno es porque normalmente se envió de la página de modificado y eliminado
+              de Empresas para mostrar al usuario que se eliminó modificó exitosamente alguna
+              Empresa.  			  
+			 
+		      @Fin parametros 
+		   */
+
+			
+			function IrMantoUsuarios(Mensaje) {
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "mantoUsuarios.php",
+                    data: "Mensaje="+Mensaje,
+                    success: function (msg) {
+                        tab = document.getElementById("tabla");
+                        padre = tab.parentNode;
+                        padre.removeChild(tab);
+                        $("#final").fadeIn("fast", function () {
+                            $("#final").html(msg);
+                        }
+                        )
+                    }, async: true
+                })
+
+            }		
+			
+			
+		   /* @Función: IrEditarUsuarios
+              @Detalle Función
+		   
+              Esta función lleva al usuario a la página SSO_EditarDependencias.php donde 
+              puede modificar o eliminar dependencias. Se le envía un parámetro de Mensaje 
+              para mostrarlo antes de mostrar los botones y la dependencia. 			  
+			  
+              @Fin Detalle Función  
+
+		      @Parametros 
+			  
+			  IdEmpresa : El Identificador de la Empresa que se va a editar para traerla
+              y modificarla o eliminarla. 			  
+			  
+			  Mensaje : Este Mensaje es usado por si tiene que mostrar un mensaje
+              antes de mostrar los distintos botones y la dependecia.
+              El mensaje puede ser o no enviado, si viene vacío simplemente muestra vacío pero
+              si viene lleno es porque normalmente se envió de de alguna otra pantalla.  			  
+			 
+		      @Fin parametros 
+			  
+			  @Diagrama PHP: imgPHP/Empresa/ModificarEmpresa.png
+			  
+		   */				
+
+			function IrEditarUsuarios(IdEmpresa,Mensaje) {
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "SSO_EditarEmpresas.php",
+                    data: "IdEmpresa="+IdEmpresa+"&Mensaje="+Mensaje,
+                    success: function (msg) {
+                        tab = document.getElementById("tabla");
+                        padre = tab.parentNode;
+                        padre.removeChild(tab);
+                        $("#final").fadeIn("fast", function () {
+                            $("#final").html(msg);
+                        }
+                        )
+                    }, async: true
+                })
+            }
+			
+
+		   /* @Función: IrAgregarUsuarios
+              @Detalle Función
+		   
+              Esta función lleva al usuario a la página SSO_AgregarEmpresasNueva.php donde 
+              puede agregar Empresas. Se le envía un parámetro de Mensaje 
+              para mostrarlo antes de mostrar los botones y la Empresa y normalmente
+			  es enviado cuando se agrega una Empresa y se le quiere decir al usuario
+              que se agregó exitosamente. Además que se queda en la misma pantallla de
+              agregar Empresas y no tenga que salirse de esa pantalla.  			  
+			  
+              @Fin Detalle Función  
+
+		      @Parametros 
+			  
+			  Mensaje : Este Mensaje es usado por si tiene que mostrar un mensaje
+              antes de mostrar los distintos botones y controles para agregar una Empresa.
+              El mensaje puede ser o no enviado, si viene vacío simplemente muestra vacío pero
+              si viene lleno es porque normalmente se envió de de la misma pantalla de agregar
+			  Empresas ya que se quiere entrar en un ciclo de agregar Empresas y no salirse
+			  a otra pantallla.  			  
+			 
+		      @Fin parametros 
+			  
+			  @Diagrama PHP: imgPHP/Empresas/AgregarEmpresa.png
+			  
+		   */			
+			
+			function IrAgregarUsuarios(Mensaje) {
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "SSO_AgregarUsuariosNueva.php",
+                    data: "Mensaje="+Mensaje,
+                    success: function (msg) {
+                        tab = document.getElementById("tabla");
+                        padre = tab.parentNode;
+                        padre.removeChild(tab);
+                        $("#final").fadeIn("fast", function () {
+                            $("#final").html(msg);
+                        }
+                        )
+                    }, async: true
+                })
+            }			
+			
+
+		   /* @Función: GuardarUsuarios
+              @Detalle Función
+		   
+              Esta función lleva al usuario a la página SSOGuardarEmpresas.php donde 
+              se guarda la Empresa por una modificación que se haya hecho en los datos
+			  de la Empresa. Se verifica que ningún parámetro venga vacío y después se pasan los parámetros
+			  a la página php correspondiente.
+			  
+              @Fin Detalle Función  
+
+		      @Parametros 
+			  
+		      IdEmpresa : Es la llave o id de la tabla Empresa por lo que se usa para
+			  encontrar el valor en el update como valor único.
+			  
+			  Empresa : Nombre de la Empresa ya sea ICE u otra.
+			  
+			  Estado : El estado de la Empresa ya sea activa o inactiva, es un parámetro 
+			  de tipo número.
+			  			 
+		      @Fin parametros
+			  
+			  @Diagrama PHP: imgPHP/Empresa/ModificarEmpresa.png
+			  
+		   */	
+			
+			
+			function GuardarUsuario(IdEmpresa,Empresa,Estado) {
+			
+			if (Empresa.length == 0 ){
+			 MostrarMensajeInformativo("La Empresa es requerida.");
+			}else if (Estado.length == 0 ){
+			 MostrarMensajeInformativo("El Estado es requerido.");
+			}else if (IdEmpresa.length == 0 ){
+			 MostrarMensajeInformativo("El Id de la Empresa es requerido.");
+			}else{
+                $("#final").fadeOut("fast");
+                $.ajax({type: "GET", url: "SSOGuardarEmpresa.php",
+                    data: "IdEmpresa="+IdEmpresa+"&NombreEmpresa="+Empresa+"&Estado="+Estado,
+                    success: function (msg) {	
+                     var result = $.trim(msg);						  
+					 if (result === "La Empresa fue Modificada." ){
+					   IrMantoEmpresas(msg);
+				     }
+					 else{ 
+					  IrEditarEmpresas(IdEmpresa,msg);						   
+				     }										
+                    }, async: true
+                })						 						
+            }
+			
+			}
+			
+			
+			
+			
+		   /* @Función: EliminarUsuario
+              @Detalle Función
+		   
+              Esta función pregunta primero si el id de la Empresa viene vacío 
+              o viene con valores, si el valor viene lleno se llama a la función 
+              MostrarPreguntaBorrarRegistro para verificar que el usuario quiere 
+              eliminar el registro, se le envía el parámetro 1 que indica a esta
+			  función que debe ir a la pantalla de mantenimiento de Empresas
+              después que elimina la Empresa.			  
+              			  			  
+              @Fin Detalle Función  
+
+		      @Parametros 
+			  
+		      IdEmpresa : Es la llave o id de la tabla Empresa por lo que se usa para
+			  encontrar el valor en el update como valor único.
+		  			 
+		      @Fin parametros
+			  
+			  @Diagrama PHP: imgPHP/Empresa/EliminarEmpresa.png
+			  
+		   */				
+			
+			
+			function EliminarUsuario(IdEmpresa) {
+			
+			if (IdEmpresa.length == 0 ){
+			 MostrarMensajeInformativo("El Identificador de Empresa es requerido.");
+			}else{
+			 MostrarPreguntaBorrarRegistro("Desea Eliminar esta Empresa?",IdEmpresa,"SSOEliminarEmpresa.php","IdEmpresa",2);			
+			 }							
+            }
+						
+		   /* @Función: AgregarUsuario
+              @Detalle Función
+		   
+              Esta función lleva al usuario a la página SSOAgregarEmpresa.php donde 
+              se agrega la Empresa, se verifica que ningún parámetro venga vacío y después se pasan los parámetros
+			  a la página php correspondiente.	El Id de la Empresa es insertada por una secuencia de la tabla 
+              automáticamente.			  
+              			  			  
+              @Fin Detalle Función  
+
+		      @Parametros 
+			  
+			  Empresa : Nombre de la Empresa.
+			  
+			  Estado : El estado de la Empresa ya sea activa o inactiva, es un parámetro 
+			  de tipo número.
+		  			 
+		      @Fin parametros
+			  
+			  @Diagrama PHP: imgPHP/Empresa/AgregarEmpresa.png
+			  
+		   */				
+			
+			function AgregarUsuario(IdPersona,Usuario,LDAPICE,Dominio,UsuarioBaseConectar,ClaveBaseConectar,IdAutorizador,IdSistema,Justificacion,Observacion) {
+			
+			
+			 if (IdPersona === IdAutorizador ){
+			  MostrarMensajeInformativo("La persona Usuario no puede ser igual al Autorizador");
+			 }else if (Usuario.length == 0 ){ 
+			  MostrarMensajeInformativo("El Usuario es requerido.");
+			 }else if (LDAPICE == "1" && Dominio == "Escoger Dominio" ){
+			  MostrarMensajeInformativo("El Usuario es LDAP y Requiere que se escoja un Dominio");
+			 }else if (Justificacion.length == 0){
+			  MostrarMensajeInformativo("El Campo de Justificación del Usuario es Requerido");
+			 } 
+			 else{			
+                $("#final").fadeOut("fast");
+				$.ajax({type: "GET", url: "Enviar.php",
+                    data: "",
+                    success: function (msg) {	
+                     IrMantoUsuarios(msg)					
+                    }, async: true
+                })
+				
+				//$.ajax({type: "GET", url: "http://10.129.47.109:8080/api/v1/ldapAutenticacionUsuario",
+				    //headers: {'Content-Type': 'application/json;charset=UTF-8'},
+					//headers: {'Transfer-Encoding': 'chunked'},
+				    //dataType: 'json',
+                    //data: "{\"usuario\":\""+Usuario+"\",\"clave\": \"ANDYari146791\",\"dominio\":\""+Dominio+"\",\"updatedAt\": \"2021-08-21\",\"estado\":1}",
+					//data:{usuario: "jolope20",clave: "ANDYari146791",dominio: "icetel",updatedAt: "2021-08-21","estado": 1},
+                    //success: function (msg) {
+					  //IrMantoUsuarios(msg); 
+										 
+				      /*$.ajax({type: "GET", url: "SSOAgregarUsuario.php",
+                       data: "IdPersona="+IdPersona+"&Usuario="+Usuario+"&LDAPICE="+LDAPICE+"&Dominio="+Dominio+"&UsuarioBaseConectar="+UsuarioBaseConectar+"&ClaveBaseConectar="+ClaveBaseConectar+"&IdAutorizador="+IdAutorizador+"&IdSistema="+IdSistema+"&Justificacion="+Justificacion+"&Observacion="+Observacion,
+                       success: function (msg2) {
+					    IrAgregarUsuarios(msg2);
+                       }, async: true	
+                      })*/	
+					 	 
+                    //}, async: true	
+                //})
+				
+				/*var settings = {
+					"url": "http://10.129.47.110:8080/api/v1/ldapAutenticacionUsuario",
+					"method": "GET",
+					"timeout": 0,
+					"headers": {
+					 "Content-Type": "application/json",
+					 "Cookie": "JSESSIONID=AB37CC242885EEC0EEE52B626D9ECFFA"
+				    },
+					 "data": JSON.stringify({
+					 "usuario": "jolope20",
+					 "clave": "KOKI",
+					 "dominio": "icetel",
+					 "updatedAt": "2021-08-21",
+					 "estado": 1
+			        }),
+				};
+				
+				 $.ajax(settings).done(function (response) {
+                  //console.log(response);
+				  IrAgregarUsuarios(response);
+                 });*/
+								
+              }	
+			}	
+			
+			
+			 /* @Función: DeshabilitarComponentesTipoUsuario
+              @Detalle Función
+		   
+              Esta función lleva al usuario a la página SSOAgregarEmpresa.php donde 
+              se agrega la Empresa, se verifica que ningún parámetro venga vacío y después se pasan los parámetros
+			  a la página php correspondiente.	El Id de la Empresa es insertada por una secuencia de la tabla 
+              automáticamente.			  
+              			  			  
+              @Fin Detalle Función  
+
+		      @Parametros 
+			  
+			  Empresa : Nombre de la Empresa.
+			  
+			  Estado : El estado de la Empresa ya sea activa o inactiva, es un parámetro 
+			  de tipo número.
+		  			 
+		      @Fin parametros
+			  
+			  @Diagrama PHP: imgPHP/Empresa/AgregarEmpresa.png
+			  
+		   */		
+			
+									
+            function DeshabilitarComponentesTipoUsuario(Componente,Componente2,Componente3,estado) {
+			 if (estado === '1') {
+			  document.getElementById(Componente).disabled = false;
+			  document.getElementById(Componente2).disabled = true;
+			  document.getElementById(Componente3).disabled = true;		  
+			 }else{ 
+			  document.getElementById(Componente).disabled = true;
+			  document.getElementById(Componente).value = 'Escoger Dominio';
+			  document.getElementById(Componente2).disabled = false;
+			  document.getElementById(Componente3).disabled = false;			  
+             }
+            }			
+			
+    </script>
+		
+	<style type="text/css" class="init">
+	
+		div.dataTables_wrapper {
+			width: 100%;
+			margin: 0 auto;
+		}
+		
+		table.dataTable thead .sorting{
+		    background: none;
+		}
+
+		ul{
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			background-color: white;
+			border: 1px solid grey;
+		}
+		
+		li {
+			background-color: white;
+		}
+		
+		
+		td {
+		    white-space: nowrap;
+		    font-size: 11px; 
+		}
+		
+		td.s13 {
+		    white-space: nowrap;
+		    font-size: 13px; 
+		}
+		
+		 
+		td.wrapok {
+		    white-space:normal
+		}	
+
+        .column {
+	     float: left;
+	     width: 50%;
+	     padding: 10px;
+	    }
+
+	    .row:after {
+	     content: "";
+	     display: table;
+	     clear: both;
+	    }
+
+		
+
+	</style>	
+	
+<body bgcolor="#ffffff">
+
+<div id="final"></div>
+<br><br>
+<table id="tabla" border="0" cellpadding="0" cellspacing="0" width="498" height="495" align="center" style="background-image:url('IMG/SSO_Login.png');">
+  <tr><td>
+       
+       <table border="0" align="center" cellpadding="0" cellspacing="0">
+
+       <tr> 
+          <td align="center"> 
+			<select class="styled-select" id="dominio" name="dominio">
+			  <option value="icetel">Dominio ICETEL</option>
+			  <option value="sabana">Dominio SABANA</option>
+			</select>
+          </td>
+        </tr>
+        <tr> 
+          <td align="center"> 
+              <input type="text" name="usuario" placeholder="usuario">
+          </td>
+        </tr>
+        <tr> 
+          <td align="center"> 
+              <input type="password" name="clave" placeholder="clave">
+          </td>
+        </tr>
+        <tr> 
+          <td align="center">
+              <input type="submit" name="Submit" onClick="javascript:verificar()" value="&nbsp;&nbsp;Aceptar&nbsp;&nbsp;" class="botonPortada">
+         </tr>
+		 
+       </table>
+       
+  		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+		<p>&nbsp;
+		
+   </td></tr>
+  
+</table>
+</body>
+</html>

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: ice.sors.rest.util.ADT3G_AutenticaTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.092 s - in ice.sors.rest.util.ADT3G_AutenticaTest
