@@ -31,7 +31,7 @@ public class SpecificationBuilder {
         
         if (tipo == 1) {
         	specs = params.stream()
-        			.map(PortfolioSpecification::new)
+        			.map(TwitterSpecification::new)
         			.collect(Collectors.toList());
         }
         

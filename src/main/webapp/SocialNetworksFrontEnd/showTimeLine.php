@@ -56,7 +56,6 @@ print("<table>");
 
 foreach ($jsonIterator as $key => $val) {
     if(is_array($val)) {
-		//Hola
     } else {
 	 
 	 print("<tr>");	

@@ -40,6 +40,11 @@ public class ECommerceException extends Exception{
         String message="";
          
         switch(reason){
+        
+            case 1:
+            message="Twitter id not found koki";
+            break;
+        
             case 4:
                 message="Missing Data";
                 break;
