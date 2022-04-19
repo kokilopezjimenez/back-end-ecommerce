@@ -24,6 +24,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /* @Seccion: Anotación @SpringBootApplication.*/
 /* @Detalle seccion
 
@@ -44,6 +47,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @SpringBootApplication
 public class Application {
 	
+	private static Logger LOGGER = LoggerFactory.getLogger(Application.class);
+	
   public static void main(String[] args) {
 	  
 		SpringApplication.run(Application.class, args);
@@ -53,6 +58,10 @@ public class Application {
         map.put("SERVER_PORT", "8585");
         application.setDefaultProperties(map);
         application.run(args);*/
+		
+		LOGGER.info("This is information");
+		LOGGER.debug("This is debug");
+		LOGGER.error("This is error");
 				
 	}
   

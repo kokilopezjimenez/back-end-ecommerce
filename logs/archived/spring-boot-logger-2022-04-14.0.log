@@ -1,0 +1,130 @@
+2022-04-14 12:33:19,145 INFO org.springframework.core.KotlinDetector [main] Kotlin reflection implementation not found at runtime, related features won't be available.
+2022-04-14 12:33:19,177 INFO org.springframework.test.context.support.AbstractTestContextBootstrapper [main] Neither @ContextConfiguration nor @ContextHierarchy found for test class [ecommerce.backend.rest.controller.TwitterControllerTest], using SpringBootContextLoader
+2022-04-14 12:33:19,182 INFO org.springframework.test.context.support.AbstractContextLoader [main] Could not detect default resource locations for test class [ecommerce.backend.rest.controller.TwitterControllerTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2022-04-14 12:33:19,183 INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils [main] Could not detect default configuration classes for test class [ecommerce.backend.rest.controller.TwitterControllerTest]: TwitterControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2022-04-14 12:33:19,281 INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration ecommerce.backend.rest.Application for test class ecommerce.backend.rest.controller.TwitterControllerTest
+2022-04-14 12:33:19,349 INFO org.springframework.test.context.support.AbstractTestContextBootstrapper [main] Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2022-04-14 12:33:19,363 INFO org.springframework.test.context.support.AbstractTestContextBootstrapper [main] Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@5d9b7a8a, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1e8ce150, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@604f2bd2, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@1d3ac898, org.springframework.test.context.support.DirtiesContextTestExecutionListener@1b73be9f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@628c4ac0, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@7b84fcf8, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@30b19518, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@363042d7, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@366ac49b, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@6ad59d92, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@56f0cc85]
+2022-04-14 12:33:19,608 WARN org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer [main] 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/C:/Users/Usuario/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+	jar:file:/C:/Users/Usuario/.m2/repository/org/json/json/20160212/json-20160212.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+2022-04-14 12:33:19,617 INFO org.springframework.boot.StartupInfoLogger [main] Starting TwitterControllerTest on SPE-JOLOPE2 with PID 2400 (started by Usuario in D:\Jorge\Eclipse\workspace\Back-End-ECommerce-Social-Networks)
+2022-04-14 12:33:19,618 DEBUG org.springframework.boot.StartupInfoLogger [main] Running with Spring Boot v2.1.2.RELEASE, Spring v5.1.4.RELEASE
+2022-04-14 12:33:19,618 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2022-04-14 12:33:19,879 WARN org.springframework.core.log.CompositeLog [background-preinit] For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2022-04-14 12:33:20,589 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data repositories in DEFAULT mode.
+2022-04-14 12:33:20,662 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 65ms. Found 1 repository interfaces.
+2022-04-14 12:33:21,172 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$6d4d05fa] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-04-14 12:33:21,390 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2022-04-14 12:33:22,552 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2022-04-14 12:33:22,631 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2022-04-14 12:33:22,743 INFO org.hibernate.Version [main] HHH000412: Hibernate Core {5.3.7.Final}
+2022-04-14 12:33:22,745 INFO org.hibernate.cfg.Environment [main] HHH000206: hibernate.properties not found
+2022-04-14 12:33:22,934 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2022-04-14 12:33:23,368 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2022-04-14 12:33:23,407 INFO org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl [main] HHH000421: Disabling contextual LOB creation as hibernate.jdbc.lob.non_contextual_creation is true
+2022-04-14 12:33:31,892 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-04-14 12:33:32,886 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2022-04-14 12:33:32,935 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-04-14 12:33:33,931 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@779cb140, org.springframework.security.web.context.SecurityContextPersistenceFilter@1ee126de, org.springframework.security.web.header.HeaderWriterFilter@4dc16fc9, org.springframework.security.web.csrf.CsrfFilter@63e40188, org.springframework.security.web.authentication.logout.LogoutFilter@2318651f, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@1e9a10e9, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@762db992, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@45a4587d, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@6f986031, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4babe06f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7307ae6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@70a91d72, org.springframework.security.web.session.SessionManagementFilter@24890021, org.springframework.security.web.access.ExceptionTranslationFilter@33997e07, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7d3faf1d]
+2022-04-14 12:33:34,054 INFO org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver [main] Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-04-14 12:33:34,192 INFO org.springframework.boot.StartupInfoLogger [main] Started TwitterControllerTest in 14.802 seconds (JVM running for 15.678)
+2022-04-14 12:33:34,311 INFO ecommerce.backend.rest.controller.TwitterController [main] ===================inside API check ===================
+2022-04-14 12:33:35,956 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Id:143203091
+2022-04-14 12:33:35,956 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Jorge
+2022-04-14 12:33:35,957 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] 1
+2022-04-14 12:33:35,957 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] 1
+2022-04-14 12:33:35,959 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Hola 22:09
+2022-04-14 12:33:35,959 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Hello W
+2022-04-14 12:33:35,960 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Hello Wor
+2022-04-14 12:33:35,960 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] NB HP 14 Pulgadas Procesador I3 Memoria 4GB Disco Duro 256G SSD Marketplace506
+2022-04-14 12:33:35,961 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Hola 22:09
+2022-04-14 12:33:35,962 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Hola Koki
+2022-04-14 12:33:35,978 INFO ecommerce.backend.rest.controller.TwitterController [main] ===================inside API check ===================
+2022-04-14 12:33:36,872 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Id:143203091
+2022-04-14 12:33:36,873 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Jorge
+2022-04-14 12:33:36,874 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] 1
+2022-04-14 12:33:36,874 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] 1
+2022-04-14 12:33:36,875 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Hola 22:09
+2022-04-14 12:33:36,875 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Hello W
+2022-04-14 12:33:36,876 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Hello Wor
+2022-04-14 12:33:36,877 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] NB HP 14 Pulgadas Procesador I3 Memoria 4GB Disco Duro 256G SSD Marketplace506
+2022-04-14 12:33:36,877 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Hola 22:09
+2022-04-14 12:33:36,878 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Hola Koki
+2022-04-14 12:33:36,919 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [Thread-4] Shutting down ExecutorService 'applicationTaskExecutor'
+2022-04-14 12:33:36,920 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [Thread-4] Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-04-14 12:33:36,922 INFO com.zaxxer.hikari.HikariDataSource [Thread-4] HikariPool-1 - Shutdown initiated...
+2022-04-14 12:33:36,934 INFO com.zaxxer.hikari.HikariDataSource [Thread-4] HikariPool-1 - Shutdown completed.
+2022-04-14 12:43:20,879 INFO org.springframework.core.KotlinDetector [main] Kotlin reflection implementation not found at runtime, related features won't be available.
+2022-04-14 12:43:20,914 INFO org.springframework.test.context.support.AbstractTestContextBootstrapper [main] Neither @ContextConfiguration nor @ContextHierarchy found for test class [ecommerce.backend.rest.controller.TwitterControllerTest], using SpringBootContextLoader
+2022-04-14 12:43:20,917 INFO org.springframework.test.context.support.AbstractContextLoader [main] Could not detect default resource locations for test class [ecommerce.backend.rest.controller.TwitterControllerTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2022-04-14 12:43:20,918 INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils [main] Could not detect default configuration classes for test class [ecommerce.backend.rest.controller.TwitterControllerTest]: TwitterControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2022-04-14 12:43:21,025 INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration ecommerce.backend.rest.Application for test class ecommerce.backend.rest.controller.TwitterControllerTest
+2022-04-14 12:43:21,096 INFO org.springframework.test.context.support.AbstractTestContextBootstrapper [main] Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2022-04-14 12:43:21,110 INFO org.springframework.test.context.support.AbstractTestContextBootstrapper [main] Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@1b73be9f, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@628c4ac0, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@7b84fcf8, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@30b19518, org.springframework.test.context.support.DirtiesContextTestExecutionListener@363042d7, org.springframework.test.context.transaction.TransactionalTestExecutionListener@366ac49b, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@6ad59d92, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@56f0cc85, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@62e20a76, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@2cc44ad, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@44b3606b, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@1477089c]
+2022-04-14 12:43:21,350 WARN org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer [main] 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/C:/Users/Usuario/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+	jar:file:/C:/Users/Usuario/.m2/repository/org/json/json/20160212/json-20160212.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+2022-04-14 12:43:21,360 INFO org.springframework.boot.StartupInfoLogger [main] Starting TwitterControllerTest on SPE-JOLOPE2 with PID 26532 (started by Usuario in D:\Jorge\Eclipse\workspace\Back-End-ECommerce-Social-Networks)
+2022-04-14 12:43:21,361 DEBUG org.springframework.boot.StartupInfoLogger [main] Running with Spring Boot v2.1.2.RELEASE, Spring v5.1.4.RELEASE
+2022-04-14 12:43:21,362 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2022-04-14 12:43:21,620 WARN org.springframework.core.log.CompositeLog [background-preinit] For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+2022-04-14 12:43:22,315 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data repositories in DEFAULT mode.
+2022-04-14 12:43:22,387 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 65ms. Found 1 repository interfaces.
+2022-04-14 12:43:22,921 INFO org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [main] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$45719f38] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-04-14 12:43:23,156 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2022-04-14 12:43:24,331 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2022-04-14 12:43:24,402 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2022-04-14 12:43:24,456 INFO org.hibernate.Version [main] HHH000412: Hibernate Core {5.3.7.Final}
+2022-04-14 12:43:24,458 INFO org.hibernate.cfg.Environment [main] HHH000206: hibernate.properties not found
+2022-04-14 12:43:24,569 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2022-04-14 12:43:24,971 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2022-04-14 12:43:25,004 INFO org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl [main] HHH000421: Disabling contextual LOB creation as hibernate.jdbc.lob.non_contextual_creation is true
+2022-04-14 12:43:34,074 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-04-14 12:43:35,402 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2022-04-14 12:43:35,493 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-04-14 12:43:37,036 INFO org.springframework.security.web.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4a467ada, org.springframework.security.web.context.SecurityContextPersistenceFilter@24890021, org.springframework.security.web.header.HeaderWriterFilter@639bf405, org.springframework.security.web.csrf.CsrfFilter@2433bcd4, org.springframework.security.web.authentication.logout.LogoutFilter@41e43885, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4bd1b07d, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@7307ae6, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@92775a3, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@1be4f05c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7205a8b7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3549c070, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2512155e, org.springframework.security.web.session.SessionManagementFilter@9d7a853, org.springframework.security.web.access.ExceptionTranslationFilter@75b25ec3, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7712df76]
+2022-04-14 12:43:37,224 INFO org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver [main] Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-04-14 12:43:37,442 INFO org.springframework.boot.StartupInfoLogger [main] Started TwitterControllerTest in 16.306 seconds (JVM running for 17.231)
+2022-04-14 12:43:37,616 INFO ecommerce.backend.rest.controller.TwitterController [main] ===================inside API check ===================
+2022-04-14 12:43:39,195 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Id:143203091
+2022-04-14 12:43:39,195 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Jorge
+2022-04-14 12:43:39,196 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] 1
+2022-04-14 12:43:39,196 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] 1
+2022-04-14 12:43:39,196 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Hola 22:09
+2022-04-14 12:43:39,196 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Hello W
+2022-04-14 12:43:39,196 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Hello Wor
+2022-04-14 12:43:39,197 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] NB HP 14 Pulgadas Procesador I3 Memoria 4GB Disco Duro 256G SSD Marketplace506
+2022-04-14 12:43:39,197 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Hola 22:09
+2022-04-14 12:43:39,197 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Hola Koki
+2022-04-14 12:43:39,207 INFO ecommerce.backend.rest.controller.TwitterController [main] ===================inside API check ===================
+2022-04-14 12:43:40,080 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Id:143203091
+2022-04-14 12:43:40,080 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Jorge
+2022-04-14 12:43:40,081 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] 1
+2022-04-14 12:43:40,082 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] 1
+2022-04-14 12:43:40,082 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Hola 22:09
+2022-04-14 12:43:40,082 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Hello W
+2022-04-14 12:43:40,083 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Hello Wor
+2022-04-14 12:43:40,083 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] NB HP 14 Pulgadas Procesador I3 Memoria 4GB Disco Duro 256G SSD Marketplace506
+2022-04-14 12:43:40,084 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Hola 22:09
+2022-04-14 12:43:40,085 DEBUG ecommerce.backend.rest.service.TwitterServiceImpl [main] Hola Koki
+2022-04-14 12:43:40,147 INFO org.springframework.scheduling.concurrent.ExecutorConfigurationSupport [Thread-4] Shutting down ExecutorService 'applicationTaskExecutor'
+2022-04-14 12:43:40,151 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [Thread-4] Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-04-14 12:43:40,154 INFO com.zaxxer.hikari.HikariDataSource [Thread-4] HikariPool-1 - Shutdown initiated...
+2022-04-14 12:43:40,177 INFO com.zaxxer.hikari.HikariDataSource [Thread-4] HikariPool-1 - Shutdown completed.

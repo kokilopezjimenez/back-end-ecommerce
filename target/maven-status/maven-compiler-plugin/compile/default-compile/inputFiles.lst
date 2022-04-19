@@ -3,6 +3,7 @@ D:\Jorge\Eclipse\workspace\Back-End-ECommerce-Social-Networks\src\main\java\ecom
 D:\Jorge\Eclipse\workspace\Back-End-ECommerce-Social-Networks\src\main\java\ecommerce\backend\rest\Application.java
 D:\Jorge\Eclipse\workspace\Back-End-ECommerce-Social-Networks\src\main\java\ecommerce\backend\rest\controller\TwitterController.java
 D:\Jorge\Eclipse\workspace\Back-End-ECommerce-Social-Networks\src\main\java\ecommerce\backend\rest\searchfilterrestapi\SearchCriteria.java
+D:\Jorge\Eclipse\workspace\Back-End-ECommerce-Social-Networks\src\main\java\ecommerce\backend\rest\aspect\LoggingAspect.java
 D:\Jorge\Eclipse\workspace\Back-End-ECommerce-Social-Networks\src\main\java\ecommerce\backend\rest\searchfilterrestapi\SpecificationBuilder.java
 D:\Jorge\Eclipse\workspace\Back-End-ECommerce-Social-Networks\src\main\java\ecommerce\backend\rest\service\TwitterServiceImpl.java
 D:\Jorge\Eclipse\workspace\Back-End-ECommerce-Social-Networks\src\main\java\ecommerce\backend\rest\util\Node.java
@@ -12,9 +13,11 @@ D:\Jorge\Eclipse\workspace\Back-End-ECommerce-Social-Networks\src\main\java\ecom
 D:\Jorge\Eclipse\workspace\Back-End-ECommerce-Social-Networks\src\main\java\ecommerce\backend\rest\service\TwitterService.java
 D:\Jorge\Eclipse\workspace\Back-End-ECommerce-Social-Networks\src\main\java\ecommerce\backend\rest\util\Application.java
 D:\Jorge\Eclipse\workspace\Back-End-ECommerce-Social-Networks\src\main\java\ecommerce\backend\rest\service\TwitterAPIOKHttpImpl.java
+D:\Jorge\Eclipse\workspace\Back-End-ECommerce-Social-Networks\src\main\java\ecommerce\backend\rest\configuration\ApplicationConfig.java
 D:\Jorge\Eclipse\workspace\Back-End-ECommerce-Social-Networks\src\main\java\ecommerce\backend\rest\exception\ErrorResponse.java
 D:\Jorge\Eclipse\workspace\Back-End-ECommerce-Social-Networks\src\main\java\ecommerce\backend\rest\exception\GlobalExceptionHandler.java
 D:\Jorge\Eclipse\workspace\Back-End-ECommerce-Social-Networks\src\main\java\ecommerce\backend\rest\searchfilterrestapi\TwitterSpecification.java
+D:\Jorge\Eclipse\workspace\Back-End-ECommerce-Social-Networks\src\main\java\ecommerce\backend\rest\aspect\Loggable.java
 D:\Jorge\Eclipse\workspace\Back-End-ECommerce-Social-Networks\src\main\java\ecommerce\backend\rest\util\ParameterStringBuilder.java
 D:\Jorge\Eclipse\workspace\Back-End-ECommerce-Social-Networks\src\main\java\ecommerce\backend\rest\exception\ResourceNotFoundException.java
 D:\Jorge\Eclipse\workspace\Back-End-ECommerce-Social-Networks\src\main\java\ecommerce\backend\rest\service\TwitterAPI.java

@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import ecommerce.backend.rest.aspect.Loggable;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -15,6 +16,7 @@ public class TwitterAPIOKHttpImpl implements TwitterAPI{
 	private String bearer = "AAAAAAAAAAAAAAAAAAAAAOnGZwEAAAAAguepSK3Nm1pBVglPEb3ll936DVY%3DC9mGxa6jNIT379smuuyfOos1bPmunl6pnkzkFbv2yCn1z1udBH";
 		
 	@Override
+	@Loggable
 	public ResponseEntity<String> getTimeLineById(Long twitterId){
 		
 		Response response=null;
@@ -32,7 +34,6 @@ public class TwitterAPIOKHttpImpl implements TwitterAPI{
 				try {
 					response = client.newCall(request).execute();					
 					data = response.body().string();
-		            System.out.println("Data: " + data);
 					
 				} catch (IOException e) {
 					// TODO Auto-generated catch block

@@ -17,7 +17,7 @@ public interface TwitterService{
 		
 		public ResponseEntity<Twitter> getTwittersById(@PathVariable(value = "id") Long twitterId) throws ResourceNotFoundException,ECommerceException;
 		
-		public ResponseEntity<Twitter> updateTwitter(@PathVariable(value = "id") Long twitterId, @Valid @RequestBody Twitter twitterDetails) throws ResourceNotFoundException;
+		public ResponseEntity<Twitter> updateTwitter(@PathVariable(value = "id") Long twitterId, @Valid @RequestBody Twitter twitterDetails) throws ResourceNotFoundException,ECommerceException;
 		
 		public Map<String, Boolean> deleteTwitter(@PathVariable(value = "id") Long twitterId) throws Exception;
 		

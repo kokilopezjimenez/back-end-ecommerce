@@ -1,5 +1,6 @@
 package ecommerce.backend.rest.controller;
 
+import ecommerce.backend.rest.aspect.Loggable;
 import ecommerce.backend.rest.exception.ECommerceException;
 import ecommerce.backend.rest.exception.ResourceNotFoundException;
 import ecommerce.backend.rest.model.Twitter;
@@ -13,6 +14,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+/*import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;*/
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
 /**
  *
  * @author Jorge Lopez
@@ -21,11 +39,18 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1")
+/*@Consumes({ MediaType.APPLICATION_JSON })
+@Produces({ MediaType.APPLICATION_JSON })*/
 public class TwitterController {
 
+	//private static final Logger LOGGER = LoggerFactory.getLogger(TwitterController.class);
+	
+	/*@Autowired
+	Environment environment;*/
+	
 	@Autowired
 	private TwitterService twitterService;
-
+	
 	/**
 	 * 
 	 * Get all list of Twitters users.
@@ -46,10 +71,12 @@ public class TwitterController {
 	 * @throws ResourceNotFoundException
 	 */
 
+	@Loggable
 	@GetMapping("/Twitter/{id}")
 	public ResponseEntity<Twitter> getTwittersById(@PathVariable(value = "id") Long twitterId)
 			throws ResourceNotFoundException, ECommerceException {
 
+		//LOGGER.info("===================inside API check ===================");
 		return twitterService.getTwittersById(twitterId);
 
 	}
@@ -73,7 +100,7 @@ public class TwitterController {
 
 	@PutMapping("/Twitter/{id}")
 	public ResponseEntity<Twitter> updateTwitter(@PathVariable(value = "id") Long twitterId,
-			@Valid @RequestBody Twitter twitterDetails) throws ResourceNotFoundException {
+			@Valid @RequestBody Twitter twitterDetails) throws ResourceNotFoundException,ECommerceException {
 
 		return twitterService.updateTwitter(twitterId, twitterDetails);
 

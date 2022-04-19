@@ -12,39 +12,39 @@ Class-Path: lib/spring-boot-starter-actuator-2.1.2.RELEASE.jar lib/sprin
  .RELEASE.jar lib/jackson-datatype-jsr310-2.9.8.jar lib/micrometer-core-
  1.1.2.jar lib/HdrHistogram-2.1.9.jar lib/LatencyUtils-2.0.3.jar lib/spr
  ing-boot-starter-data-jpa-2.1.2.RELEASE.jar lib/spring-boot-starter-aop
- -2.1.2.RELEASE.jar lib/aspectjweaver-1.9.2.jar lib/spring-boot-starter-
- jdbc-2.1.2.RELEASE.jar lib/HikariCP-3.2.0.jar lib/spring-jdbc-5.1.4.REL
- EASE.jar lib/javax.transaction-api-1.3.jar lib/jaxb-api-2.3.1.jar lib/j
- avax.activation-api-1.2.0.jar lib/hibernate-core-5.3.7.Final.jar lib/jb
- oss-logging-3.3.2.Final.jar lib/javax.persistence-api-2.2.jar lib/javas
- sist-3.23.1-GA.jar lib/byte-buddy-1.9.7.jar lib/antlr-2.7.7.jar lib/jan
- dex-2.0.5.Final.jar lib/classmate-1.4.0.jar lib/dom4j-2.1.1.jar lib/hib
- ernate-commons-annotations-5.0.4.Final.jar lib/spring-data-jpa-2.1.4.RE
- LEASE.jar lib/spring-data-commons-2.1.4.RELEASE.jar lib/spring-orm-5.1.
- 4.RELEASE.jar lib/spring-tx-5.1.4.RELEASE.jar lib/spring-beans-5.1.4.RE
- LEASE.jar lib/slf4j-api-1.7.25.jar lib/spring-aspects-5.1.4.RELEASE.jar
-  lib/spring-boot-starter-web-2.1.2.RELEASE.jar lib/spring-boot-starter-
- json-2.1.2.RELEASE.jar lib/jackson-datatype-jdk8-2.9.8.jar lib/jackson-
- module-parameter-names-2.9.8.jar lib/spring-boot-starter-tomcat-2.1.2.R
- ELEASE.jar lib/tomcat-embed-core-9.0.14.jar lib/tomcat-embed-el-9.0.14.
- jar lib/tomcat-embed-websocket-9.0.14.jar lib/hibernate-validator-6.0.1
- 4.Final.jar lib/validation-api-2.0.1.Final.jar lib/spring-web-5.1.4.REL
- EASE.jar lib/spring-webmvc-5.1.4.RELEASE.jar lib/spring-expression-5.1.
- 4.RELEASE.jar lib/spring-boot-devtools-2.1.2.RELEASE.jar lib/spring-boo
- t-2.1.2.RELEASE.jar lib/spring-boot-autoconfigure-2.1.2.RELEASE.jar lib
- /spring-core-5.1.4.RELEASE.jar lib/spring-jcl-5.1.4.RELEASE.jar lib/pos
- tgresql-42.2.5.jar lib/mysql-connector-java-8.0.19.jar lib/commons-code
- c-1.14.jar lib/okhttp-4.9.1.jar lib/okio-2.8.0.jar lib/twitter4j-stream
- -4.0.6.jar lib/twitter4j-core-4.0.6.jar lib/kotlin-stdlib-1.3.70.jar li
- b/kotlin-stdlib-common-1.3.70.jar lib/annotations-13.0.jar lib/apiguard
- ian-api-1.0.0.jar lib/junit-platform-commons-1.5.2.jar lib/micrometer-r
- egistry-prometheus-1.1.2.jar lib/simpleclient_common-0.5.0.jar lib/simp
- leclient-0.5.0.jar lib/unirest-java-1.4.9.jar lib/httpclient-4.5.6.jar 
- lib/httpcore-4.4.10.jar lib/httpasyncclient-4.1.4.jar lib/httpcore-nio-
- 4.4.10.jar lib/httpmime-4.5.6.jar lib/json-20160212.jar lib/spring-boot
- -starter-security-2.1.2.RELEASE.jar lib/spring-aop-5.1.4.RELEASE.jar li
- b/spring-security-config-5.1.3.RELEASE.jar lib/spring-security-core-5.1
- .3.RELEASE.jar lib/spring-security-web-5.1.3.RELEASE.jar
+ -2.1.2.RELEASE.jar lib/spring-boot-starter-jdbc-2.1.2.RELEASE.jar lib/H
+ ikariCP-3.2.0.jar lib/spring-jdbc-5.1.4.RELEASE.jar lib/javax.transacti
+ on-api-1.3.jar lib/jaxb-api-2.3.1.jar lib/javax.activation-api-1.2.0.ja
+ r lib/hibernate-core-5.3.7.Final.jar lib/jboss-logging-3.3.2.Final.jar 
+ lib/javax.persistence-api-2.2.jar lib/javassist-3.23.1-GA.jar lib/byte-
+ buddy-1.9.7.jar lib/antlr-2.7.7.jar lib/jandex-2.0.5.Final.jar lib/clas
+ smate-1.4.0.jar lib/dom4j-2.1.1.jar lib/hibernate-commons-annotations-5
+ .0.4.Final.jar lib/spring-data-jpa-2.1.4.RELEASE.jar lib/spring-data-co
+ mmons-2.1.4.RELEASE.jar lib/spring-orm-5.1.4.RELEASE.jar lib/spring-tx-
+ 5.1.4.RELEASE.jar lib/spring-beans-5.1.4.RELEASE.jar lib/slf4j-api-1.7.
+ 25.jar lib/spring-aspects-5.1.4.RELEASE.jar lib/spring-boot-starter-web
+ -2.1.2.RELEASE.jar lib/spring-boot-starter-json-2.1.2.RELEASE.jar lib/j
+ ackson-datatype-jdk8-2.9.8.jar lib/jackson-module-parameter-names-2.9.8
+ .jar lib/spring-boot-starter-tomcat-2.1.2.RELEASE.jar lib/tomcat-embed-
+ core-9.0.14.jar lib/tomcat-embed-el-9.0.14.jar lib/tomcat-embed-websock
+ et-9.0.14.jar lib/hibernate-validator-6.0.14.Final.jar lib/validation-a
+ pi-2.0.1.Final.jar lib/spring-web-5.1.4.RELEASE.jar lib/spring-webmvc-5
+ .1.4.RELEASE.jar lib/spring-expression-5.1.4.RELEASE.jar lib/spring-boo
+ t-devtools-2.1.2.RELEASE.jar lib/spring-boot-2.1.2.RELEASE.jar lib/spri
+ ng-boot-autoconfigure-2.1.2.RELEASE.jar lib/spring-core-5.1.4.RELEASE.j
+ ar lib/spring-jcl-5.1.4.RELEASE.jar lib/postgresql-42.2.5.jar lib/mysql
+ -connector-java-8.0.19.jar lib/commons-codec-1.14.jar lib/okhttp-4.9.1.
+ jar lib/okio-2.8.0.jar lib/twitter4j-stream-4.0.6.jar lib/twitter4j-cor
+ e-4.0.6.jar lib/kotlin-stdlib-1.3.70.jar lib/kotlin-stdlib-common-1.3.7
+ 0.jar lib/annotations-13.0.jar lib/apiguardian-api-1.0.0.jar lib/junit-
+ platform-commons-1.5.2.jar lib/micrometer-registry-prometheus-1.1.2.jar
+  lib/simpleclient_common-0.5.0.jar lib/simpleclient-0.5.0.jar lib/unire
+ st-java-1.4.9.jar lib/httpclient-4.5.6.jar lib/httpcore-4.4.10.jar lib/
+ httpasyncclient-4.1.4.jar lib/httpcore-nio-4.4.10.jar lib/httpmime-4.5.
+ 6.jar lib/json-20160212.jar lib/spring-boot-starter-security-2.1.2.RELE
+ ASE.jar lib/spring-aop-5.1.4.RELEASE.jar lib/spring-security-config-5.1
+ .3.RELEASE.jar lib/spring-security-core-5.1.3.RELEASE.jar lib/spring-se
+ curity-web-5.1.3.RELEASE.jar lib/aspectjweaver-1.9.5.jar
 Implementation-Title: Back-End-Social-Networks-ECommerce
 Implementation-Version: 0.0.1-SNAPSHOT
 Implementation-Vendor-Id: ecommerce.backend.rest

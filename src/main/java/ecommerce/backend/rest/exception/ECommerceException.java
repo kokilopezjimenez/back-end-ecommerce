@@ -42,7 +42,7 @@ public class ECommerceException extends Exception{
         switch(reason){
         
             case 1:
-            message="Twitter id not found koki";
+            message="Twitter id not found";
             break;
         
             case 4:
